@@ -1,0 +1,23 @@
+<!--pages/houseitem/houseitem.wxml-->
+<view>
+  <view class='title'>{{item.title}}</view>
+  <view class='htl-txtinfo'>
+    <view class='htl-t-v'><text class='h-info-t'>小区:</text><text class='h-info-d'>{{item.estate}}</text></view>
+    <view class='htl-t-v'><text class='h-info-t'>楼层:</text><text class='h-info-d'>{{item.floor}}</text></view>
+    <view class='htl-t-v'><text class='h-info-t'>面积:</text><text class='h-info-d'>{{item.area}}</text></view>
+    <view class='htl-t-v'><text class='h-info-t'>户型:</text><text class='h-info-d'>{{item.struct}}</text></view>
+    <view class='htl-t-v'><text class='h-info-t'>朝向:</text><text class='h-info-d'>{{item.director}}</text></view>
+    <view class='htl-t-v'><text class='h-info-t'>装修:</text><text class='h-info-d'>{{item.fitment}}</text></view>
+    <view class='htl-t-v'><text class='h-info-t'>产权:</text><text class='h-info-d'>{{item.changquan}}</text></view>
+    <view wx:if="{{item.onlet}}" class='htl-t-v'><text class='h-info-t'>总价:</text><text class='h-info-d'>{{item.totalprice}}</text></view>
+    <view wx:if="{{item.onlet}}" class='htl-t-v'><text class='h-info-t'>单价:</text><text class='h-info-d'>{{item.unitprice}}</text></view>
+    <view wx:if="{{item.onrent}}" class='htl-t-v'><text class='h-info-t'>租金:</text><text class='h-info-d'>{{item.totalprice}}</text></view>
+  </view>
+  <view class='img-container' wx:for='{{pic}}' wx:key='{{index}}'>
+  <image class="img" src="{{item =='' ? '../icon/housetosale.png':item}}"></image>
+  </view>
+  <button class="btn-connect" type='primary' bindtap='connectagent'>联系经纪人</button>
+  <view class='tabbar'>
+    <button class="css_btn_class" bindtap='toback'>返回</button>
+  </view>
+</view>

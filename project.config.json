@@ -1,0 +1,35 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.5.4",
+	"appid": "wx91704bed6d3fdfac",
+	"projectname": "esf_wxxcx_n",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "房源页面",
+					"pathName": "pages/agentshop/agentshop",
+					"query": "id=qzhffc&name=徐向前&telno=15906703217"
+				}
+			]
+		}
+	}
+}

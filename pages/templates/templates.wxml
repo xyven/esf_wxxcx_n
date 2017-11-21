@@ -1,0 +1,8 @@
+<!--pages/templates/templates.wxml-->
+<template name='agent_card'>
+  <view class='card1'>
+    <image class='img' src='../icon/img1.jpg'></image>
+    <text class='agent-info'>某某某</text>
+    <text class='agent-info'>某某房产</text>
+  </view> 
+</template>

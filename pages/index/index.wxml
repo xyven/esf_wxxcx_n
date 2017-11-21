@@ -1,0 +1,11 @@
+<!--index.wxml-->
+<view>  
+  <view class='agent-list'>
+    <view class='agent-item' wx:for="{{lst}}" data-num="{{index}}" bindtap='onTapAgent'  wx:key='id' id='{{index}}'>
+        <image class='agent-img' src='{{item.pic}}'></image>
+        <text class='agent-info1'>{{item.name}}</text>
+        <text class='agent-info2'>{{item.company}}</text>
+        <text class='agent-info2'>{{item.telno}}</text>
+    </view>
+  </view>
+</view>

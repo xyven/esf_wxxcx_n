@@ -1,0 +1,136 @@
+/* pages/agentshop/agentshop.wxss */
+
+.sv{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper_box{
+  width: 100%;
+  height: 450rpx;
+}
+
+swiper-item image {
+    width: 100%;
+    height: 450rpx;
+    display: inline-block;
+    overflow: hidden;
+}
+
+swiper-item text{
+  position: absolute;
+  top: 325rpx;
+  left: 10rpx;
+  color: #CC3333;
+  text-shadow:-1px 0 white,
+                0 1px white,
+                1px 0 white,
+                0 -1px white;
+}
+
+view.text {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 10px 10px 12px;
+    font-size: 18px;
+    color: #656565;
+}
+
+view.text:before {
+    position: absolute;
+    display: block;
+    content: ' ';
+    left: -5px;
+    width: 2px;
+    height: 100%;
+    background-color: #09bb07;
+}
+
+.line_flag {
+    width: 3px;
+    height: 16px;
+    display: inline-block;
+    background-color: #CC3333;
+}
+view.text text {
+    margin-left: 10px;
+    line-height: 18px;
+    font-weight: bold;
+}
+.housetolet-list{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.htl-item{
+  display: flex;
+  flex-direction: row;
+  margin-top: 16rpx;
+  margin-left: 16rpx;
+}
+.htl-mimg{
+  width: 280rpx;
+  height: 280rpx;
+  border-radius: 10rpx;
+}
+.htl-txtinfo{
+  display: flex;
+  flex-direction: column;
+  margin-left: 10rpx;
+  padding-right: 10rpx;
+}
+.htl-title{
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 22px; 
+}
+.htl-info{
+  font-size: 12px;
+  line-height: 16px; 
+}
+.htl-price{
+  font-size: 18px;
+  line-height: 22px; 
+  color: red;
+}
+.htl-uptm{
+  font-size: 12px;
+  color: #929292;
+  line-height: 16px; 
+}
+.tabbar{
+  position: fixed;
+  bottom: 208rpx;
+  right: 22rpx;
+  height: 300rpx;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;  
+}
+.css_btn_class {
+	font-size:13px;
+	font-weight:normal;
+	-moz-border-radius:45px;
+	-webkit-border-radius:45px;
+	border-radius: 45rpx;
+	border:1px solid #d02718;
+	padding:11rpx 15rpx;
+	text-decoration:none;
+	background:-moz-linear-gradient( center top, #f24537 5%, #c62d1f 100% );
+	background:-ms-linear-gradient( top, #f24537 5%, #c62d1f 100%  );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f');
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #f24537), color-stop(100%, #c62d1f) );
+	background-color:#f24537;
+  opacity: 0.7;
+	color:#ffffff;
+	display:inline-block;
+	text-shadow:1px 1px 0px #810e05;
+ 	-webkit-box-shadow:inset 1px 1px 2px 0px #f5978e;
+ 	-moz-box-shadow:inset 1px 1px 2px 0px #f5978e;
+ 	box-shadow:inset 1px 1px 2px 0px #f5978e;
+}.css_btn_class:active {
+	opacity: 1.0;
+}

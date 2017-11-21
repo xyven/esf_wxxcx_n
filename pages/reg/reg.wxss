@@ -1,0 +1,52 @@
+/* pages/reg/reghousetolet.wxss */
+@import "../agentshop/agentshop.wxss";
+
+.title{
+   text-align:center;
+   padding-top: 16rpx;
+   padding-bottom: 16rpx;
+   font-size: 56rpx;
+}
+
+.form-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 8rpx;
+  margin-bottom: 18rpx;
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+  background-color: #fff;
+  border: 1rpx solid #eaeaea;
+  border-bottom: 1rpx solid #d0d0d0;
+  border-radius: 5rpx;
+}
+
+.input-title{
+  width:200rpx;
+  text-align: left;
+}
+
+.picker{
+  position: absolute;
+  left:228rpx;
+  width: 480rpx;
+  align-content: center;
+}
+
+.selector-detail{
+  width: 100%;
+}
+
+.input{
+  position: absolute;
+  left:228rpx;
+  width: 480rpx;
+}
+
+
+
+.btn{
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+}
