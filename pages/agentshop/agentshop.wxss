@@ -134,3 +134,8 @@ view.text text {
 }.css_btn_class:active {
 	opacity: 1.0;
 }
+
+.qrcode{
+  width: 129px;
+  height: 129px;
+}

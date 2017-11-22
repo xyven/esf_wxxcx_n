@@ -30,7 +30,10 @@ var config = {
         getallhouses:`https://${host}/Housesall`,
 
         //登记新房源
-        regnewhouse: `https://${host}/Reghouse`
+        regnewhouse: `https://${host}/Reghouse`,
+
+        //二维码
+        qrcode: `https://${host}/xcxqrcode/`
 
         }
 };

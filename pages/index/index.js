@@ -28,7 +28,7 @@ Page({
     var that = this;
     var idx = event.currentTarget.id;
     wx.redirectTo({
-      url: '../agentshop/agentshop?id=' + that.data.lst[idx].id + '&name=' + that.data.lst[idx].name + '&telno=' + that.data.lst[idx].telno
+      url: '../agentshop/agentshop?id=' + that.data.lst[idx].id
     })
   },
   onLoad: function () {

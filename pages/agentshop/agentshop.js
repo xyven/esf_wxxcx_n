@@ -33,18 +33,15 @@ Page({
     interval: 3000,
     duration: 1000,
     circular:true,
-    toview:'htl_title'
+    toview:'htl_title',
+    qrcode:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    console.log(options);
-    wx.setNavigationBarTitle({
-      title: '房天下合作经纪人：'+ options.name,
-    })
+    var that = this;   
     wx.request({
       url: config.service.getallhouses,
       data: { 'agentid': options.id }, //options.id  ym19870817
@@ -60,29 +57,32 @@ Page({
           lstforrent: res.data.housetorent,
           numoflet: res.data.housetolet.length,
           numofrent:res.data.housetorent.length,
-          agentid: options.id,
-          agentname: options.name,
-          agentphone: options.telno
+          agentid: res.data.agent.id,
+          agentname: res.data.agent.name,
+          agentphone: res.data.agent.telno,
+          qrcode: config.service.qrcode + res.data.agent.id + '.jpg'
         })
+        wx.setNavigationBarTitle({
+          title: '房天下合作经纪人：' + that.data.agentname,
+        })   
       },
       fail: function () {
         console.log("request fail!")
       }
-    })  
+    })   
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function () {    
   },
 
   /**
@@ -111,7 +111,7 @@ Page({
     var that = this;
     that.setData({
       toview:'htl_title'
-    })
+    })    
   },
 
   torenthouse:function(){
@@ -155,9 +155,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that=this;
     return {
       title: this.data.agentname+'的二手房微门店',
-      path: 'pages/agentshop/agentshop?id=' + this.data.agentid + '&name=' + this.data.agentname + '&telno=' + this.data.agentphone,
+      path: 'pages/agentshop/agentshop?id=' + this.data.agentid,
+      imageUrl: that.data.qrcode,
       success: function (res) {
         // 转发成功
       },
@@ -165,5 +167,13 @@ Page({
         // 转发失败
       }
     }
+  },
+
+  //预览二维码
+  previewImage: function(e){
+    wx.previewImage({
+      current:this.data.qrcode,
+      urls: [this.data.qrcode]
+    })
   }
 })

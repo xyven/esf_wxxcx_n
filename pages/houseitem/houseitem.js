@@ -81,9 +81,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that=this;
     return {
       title: this.data.item.title,
       path: 'pages/houseitem/houseitem?' + parseParam(this.data.item),
+      imageUrl: that.data.pic[0],
       success: function (res) {
         // 转发成功
       },
@@ -106,7 +108,6 @@ Page({
           console.log('用户点击取消')
         }
       }
-    })
-    
+    })    
   }
 })
