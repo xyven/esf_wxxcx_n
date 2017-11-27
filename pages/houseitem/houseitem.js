@@ -77,13 +77,20 @@ Page({
   
   },
 
+  toindex: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../index/index'
+    })
+  },
+
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
     var that=this;
     return {
-      title: this.data.item.title,
+      title: this.data.item.title + ',总价:'+ this.data.item.totalprice + ',单价:' + this.data.item.unitprice + '。',
       path: 'pages/houseitem/houseitem?' + parseParam(this.data.item),
       imageUrl: that.data.pic[0],
       success: function (res) {

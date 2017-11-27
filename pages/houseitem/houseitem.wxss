@@ -42,3 +42,18 @@
   margin-top: 16rpx;
   margin-bottom: 16rpx;
 }
+
+.tabbar{
+  position: fixed;
+  bottom: 358rpx;
+  right: 22rpx;
+  height: 150rpx;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;  
+}
+
+.css_btn{
+  width: 80rpx;
+  height: 80rpx;
+}

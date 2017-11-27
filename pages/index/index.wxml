@@ -1,11 +1,18 @@
 <!--index.wxml-->
-<view>  
+<scroll-view class='sv' scroll-y="true"  scroll-with-animation="true" >  
   <view class='agent-list'>
     <view class='agent-item' wx:for="{{lst}}" data-num="{{index}}" bindtap='onTapAgent'  wx:key='id' id='{{index}}'>
         <image class='agent-img' src='{{item.pic}}'></image>
-        <text class='agent-info1'>{{item.name}}</text>
-        <text class='agent-info2'>{{item.company}}</text>
-        <text class='agent-info2'>{{item.telno}}</text>
+        <view class='agent-info-txt1'>
+          <text class='agent-info1'>姓名:{{item.name}}</text>
+          <text class='agent-info2'>公司：{{item.company}}</text>
+          <text class='agent-info2'>电话：{{item.telno}}</text>
+        </view>
+        <view class='agent-info-txt2'>
+          <text class='agent-info2'>房源:{{item.idc}}套</text>
+          <text class='agent-info2'>最近上传：{{item.lastuptime}}</text>
+          
+        </view>
     </view>
   </view>
-</view>
+</scroll-view>

@@ -27,7 +27,7 @@ Page({
     //console.log(event)
     var that = this;
     var idx = event.currentTarget.id;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../agentshop/agentshop?id=' + that.data.lst[idx].id
     })
   },
@@ -67,7 +67,7 @@ Page({
         'content-type':'application/x-www-form-urlencoded'
       },
       success:function(res){
-        //console.log(res)
+        console.log(res)
         that.setData({
             lst:res.data
             })
@@ -75,7 +75,8 @@ Page({
       fail:function(){
         console.log("request fail!")
       }
-    })
+    });
+
   },
   getUserInfo: function(e) {
     console.log(e)

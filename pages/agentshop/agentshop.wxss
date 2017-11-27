@@ -4,6 +4,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  background-color: #f5f5f5;
 }
 
 .swiper_box{
@@ -20,13 +21,21 @@ swiper-item image {
 
 swiper-item text{
   position: absolute;
-  top: 325rpx;
+  top: 300rpx;
   left: 10rpx;
   color: #CC3333;
   text-shadow:-1px 0 white,
                 0 1px white,
                 1px 0 white,
                 0 -1px white;
+}
+
+.lable-img{
+  position: absolute;
+  top: -1rpx;
+  right: -1rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 
 view.text {
@@ -48,16 +57,22 @@ view.text:before {
     background-color: #09bb07;
 }
 
-.line_flag {
-    width: 3px;
-    height: 16px;
-    display: inline-block;
-    background-color: #CC3333;
+.flag-container{
+  margin-top: 10rpx;
+  background-color: #fff;
 }
-view.text text {
-    margin-left: 10px;
-    line-height: 18px;
-    font-weight: bold;
+
+.flag-img{
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  margin-left: 10rpx;
+  margin-bottom: 8rpx;
+  vertical-align: middle;
+}
+.flag-text{
+  font-size: 35rpx;
+
 }
 .housetolet-list{
   width: 100%;
@@ -69,11 +84,22 @@ view.text text {
   display: flex;
   flex-direction: row;
   margin-top: 16rpx;
-  margin-left: 16rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
 }
 .htl-mimg{
   width: 280rpx;
   height: 280rpx;
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+.htl-mimg-lable{
+  position:absolute;
+  top: 10rpx;
+  right: -1rpx;
+  width: 50rpx;
+  height: 50rpx;
   border-radius: 10rpx;
 }
 .htl-txtinfo{
@@ -81,6 +107,7 @@ view.text text {
   flex-direction: column;
   margin-left: 10rpx;
   padding-right: 10rpx;
+  margin-top: 5rpx;
 }
 .htl-title{
   font-size: 18px;
@@ -92,7 +119,7 @@ view.text text {
   line-height: 16px; 
 }
 .htl-price{
-  font-size: 18px;
+  font-size: 14px;
   line-height: 22px; 
   color: red;
 }
@@ -113,10 +140,10 @@ view.text text {
 .css_btn_class {
 	font-size:13px;
 	font-weight:normal;
-	-moz-border-radius:45px;
-	-webkit-border-radius:45px;
-	border-radius: 45rpx;
-	border:1px solid #d02718;
+  width: 80rpx;
+  height: 80rpx;
+	border-radius: 40rpx;
+	border:1px dashed #d02718;
 	padding:11rpx 15rpx;
 	text-decoration:none;
 	background:-moz-linear-gradient( center top, #f24537 5%, #c62d1f 100% );
@@ -133,6 +160,21 @@ view.text text {
  	box-shadow:inset 1px 1px 2px 0px #f5978e;
 }.css_btn_class:active {
 	opacity: 1.0;
+}
+
+.css_btn{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.css_btn image{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.btn_img_d{
+  width: 70rpx;
+  height: 70rpx;
 }
 
 .qrcode{

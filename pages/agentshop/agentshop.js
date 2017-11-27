@@ -12,9 +12,19 @@ var parseParam = function (param, key) {
   }
   return paramStr.substr(1);
 };
+/*
+var checkImgExists=function(imgurl) {
+  var ImgObj = new Image(); //判断图片是否存在  
+  ImgObj.src = imgurl;
+  //没有图片，则返回-1  
+  if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+    return true;
+  } else {
+    return false;
+  }
+} */
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -34,7 +44,7 @@ Page({
     duration: 1000,
     circular:true,
     toview:'htl_title',
-    qrcode:''
+    qrcode: '../icon/timg.jpg'
   },
 
   /**
@@ -59,11 +69,18 @@ Page({
           numofrent:res.data.housetorent.length,
           agentid: res.data.agent.id,
           agentname: res.data.agent.name,
-          agentphone: res.data.agent.telno,
-          qrcode: config.service.qrcode + res.data.agent.id + '.jpg'
+          agentphone: res.data.agent.telno,      
+          qrcode: config.service.qrcode + res.data.agent.id + '.jpg'    
         })
+        //检查图片链接
+       // if (checkImgExists(config.service.qrcode + res.data.agent.id + '.jpg'))
+      //  {
+       //    that.setData({
+        //     qrcode: config.service.qrcode + res.data.agent.id + '.jpg'
+        //   })
+        //}
         wx.setNavigationBarTitle({
-          title: '房天下合作经纪人：' + that.data.agentname,
+          title: that.data.agentname+'的微门店',
         })   
       },
       fail: function () {
@@ -121,6 +138,13 @@ Page({
     })
   },
 
+  toindex:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '../index/index'
+    })
+  },
+
   tosalehouse:function(){
     var that = this;
     wx.navigateTo({
@@ -175,5 +199,14 @@ Page({
       current:this.data.qrcode,
       urls: [this.data.qrcode]
     })
+  },
+
+  errorloadimg:function(e)
+  {
+    var that=this;
+    that.setData({
+      qrcode:'../icon/timg.jpg'
+    })
+    console.log('1231');
   }
 })

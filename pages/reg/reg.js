@@ -140,6 +140,13 @@ Page({
     })
   },
 
+  toindex: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../index/index'
+    })
+  },
+
   onreg:function(e){
     var formData = e.detail.value;
     console.log(formData);

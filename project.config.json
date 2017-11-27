@@ -21,13 +21,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
 					"name": "房源页面",
 					"pathName": "pages/agentshop/agentshop",
-					"query": "id=qzhffc&name=徐向前&telno=15906703217"
+					"query": "id=x351236995"
 				}
 			]
 		}

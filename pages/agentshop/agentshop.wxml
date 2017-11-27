@@ -4,35 +4,39 @@
    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
     <view wx:for="{{lstforswiper}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>      
       <swiper-item>
-        <text>{{item.title}}</text>
-        <image src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>        
+        <text>{{item.title}}。总价：{{item.totalprice}}，单价：{{item.unitprice}}</text>
+        <image wx:if="{{item.keywords=='急'}}" class='lable-img' src='../icon/ji.png'></image> 
+        <image src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>         
       </swiper-item>      
     </view>
   </swiper>
-  <view>标签导航</view>
-  <view class="text" id="htl_title">
-        <view class="line_flag"></view>
-        <text>出售房源</text>
+  <view class="flag-container clearfix"  id="htl_title">
+        <image class='flag-img' src='../icon/men.png'></image>
+        <text class='flag-text'>出售房源</text>
   </view>
-  <view class='housetolet-list' wx:if="{{numoflet>0}}" wx:for="{{lstforlet}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
-    <view class='htl-item'>
-        <view><image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image></view>      
+  <view class='housetolet-list clearfix' wx:if="{{numoflet>0}}" wx:for="{{lstforlet}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
+    <view class='htl-item'>        
+        <view style='position:relative'>
+          <image class='htl-mimg-lable' wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
+          <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>          
+        </view>      
         <view class='htl-txtinfo'>
         <text class='htl-title'>{{item.title}}</text>
         <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
         <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
         <text class='htl-info'>朝向:{{item.director}}\t装修:{{item.fitment}}</text>
-        <text class='htl-price'>总价:{{item.totalprice}}</text>
-        <text class='htl-uptm'>上传时间:{{item.uptime}}</text>
+        <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text>  
+        <text class='htl-uptm'>上传时间:{{item.uptime}}</text>      
         </view>
     </view>
+    <view class='part-line'></view>
   </view>
   <view  wx:if="{{numoflet==0}}">
     <text>暂无出售房源</text>
   </view>
-  <view class="text" id="htr_title">
-        <view class="line_flag"></view>
-        <text>出租房源</text>
+  <view class="flag-container clearfix" id="htr_title">
+        <image class='flag-img' src='../icon/men.png'></image>
+        <text class='flag-text'>出租房源</text>
   </view>
   <view class='housetolet-list' wx:if="{{numofrent>0}}" wx:for="{{lstforrent}}" wx:key="id" id="{{index}}" bindtap='onhtmrentitem'>
     <view class='htl-item'>
@@ -50,12 +54,25 @@
   <view wx:if="{{numofrent==0}}">
     <text>暂无出租房源</text>
   </view>
+  <view class="flag-container clearfix" id="htr_title">
+        <image class='flag-img' src='../icon/wmen.png'></image>
+        <text class='flag-text'>门店分享</text>
+  </view>
   <view>
-    <image class='qrcode' src='{{qrcode}}' bindtap="previewImage"></image>
+    <image class='qrcode' src='{{qrcode}}' bindtap="previewImage" binderror='errorloadimg'></image>
   </view>
 </scroll-view>
 <view class='tabbar'>
-    <button class='css_btn_class' bindtap='tobuyhouse'>买房</button>
-    <button class='css_btn_class' bindtap='torenthouse'>租房</button>
-    <button class='css_btn_class' bindtap='tosalehouse'>登记</button>
+    <view class='css_btn clearfix' bindtap='toindex'>
+      <image class='btn_img_d' src='../icon/shou.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='tobuyhouse'>
+      <image src='../icon/mai.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='torenthouse'>
+      <image src='../icon/zhu.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='tosalehouse'>
+      <image class='btn_img_d' src='../icon/deng.png'></image>
+    </view>
 </view>

@@ -14,10 +14,15 @@
     <view wx:if="{{item.onrent}}" class='htl-t-v'><text class='h-info-t'>租金:</text><text class='h-info-d'>{{item.totalprice}}</text></view>
   </view>
   <view class='img-container' wx:for='{{pic}}' wx:key='{{index}}'>
-  <image class="img" src="{{item =='' ? '../icon/housetosale.png':item}}"></image>
+    <image wx:if="{{item !=''}}" class="img" src="{{item}}"></image>
   </view>
   <button class="btn-connect" type='primary' bindtap='connectagent'>联系经纪人</button>
   <view class='tabbar'>
-    <button class="css_btn_class" bindtap='toback'>返回</button>
+    <view class='css_btn clearfix' bindtap='toindex'>
+      <image class='btn_img_d' src='../icon/shou.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='toback'>
+        <image src='../icon/fang.png'></image>
+    </view>
   </view>
 </view>

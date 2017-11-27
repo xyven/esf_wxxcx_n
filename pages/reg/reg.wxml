@@ -92,6 +92,11 @@
     <button class='btn' form-type='submit' type='primary' size='default' isabled='false' >提交信息</button>
   </form>
   <view class='tabbar'>
-    <button class="css_btn_class" bindtap='toback'>返回</button>
+    <view class='css_btn clearfix' bindtap='toindex'>
+      <image class='btn_img_d' src='../icon/shou.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='toback'>
+        <image src='../icon/fang.png'></image>
+    </view>
   </view>
 </view>
