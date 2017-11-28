@@ -9,6 +9,28 @@
   font-weight: bold;  
 }
 
+.lable-share{
+  position: absolute;
+  top: -1rpx;
+  right: -1rpx;
+  width: 90rpx;
+  height: 80rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.share-img{
+  width:40rpx; 
+  height:40rpx; 
+  margin:0rpx auto;
+}
+
+.lable-share text{
+  font-size: 20rpx;
+  color: red;
+  margin:0rpx auto;
+}
+
 .htl-txtinfo{
   display: flex;
   flex-direction: row;

@@ -29,7 +29,8 @@ Page({
     var idx = event.currentTarget.id;
     wx.navigateTo({
       url: '../agentshop/agentshop?id=' + that.data.lst[idx].id
-    })
+    });
+    console.log('nt-shop');
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -67,7 +68,7 @@ Page({
         'content-type':'application/x-www-form-urlencoded'
       },
       success:function(res){
-        console.log(res)
+        //console.log(res)
         that.setData({
             lst:res.data
             })
@@ -79,7 +80,7 @@ Page({
 
   },
   getUserInfo: function(e) {
-    console.log(e)
+    //console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

@@ -58,8 +58,12 @@
         <image class='flag-img' src='../icon/wmen.png'></image>
         <text class='flag-text'>门店分享</text>
   </view>
-  <view>
-    <image class='qrcode' src='{{qrcode}}' bindtap="previewImage" binderror='errorloadimg'></image>
+  <view class='htl-item'>
+    <view><image class='qrcode' src='{{qrcode}}' bindtap="previewImage" binderror='errorloadimg'></image></view>
+    <view class='htl-txtinfo' style='padding-top:40rpx'>
+    <text  class='htl-info'>房天下付费会员或正式加入测试用户可获得专用小程序码，通过分享小程序码可在朋友圈分享自己的微门店。</text>
+    <text class='htl-price'>欢迎致电8880000咨询申请测试资格。</text>
+    </view>
   </view>
 </scroll-view>
 <view class='tabbar'>

@@ -137,14 +137,16 @@ Page({
 
   toback: function () {
     wx.navigateBack({
-    })
+    });
+    console.log('nb');
   },
 
   toindex: function () {
     var that = this;
-    wx.navigateTo({
+    wx.reLaunch({
       url: '../index/index'
-    })
+    });
+    console.log('r-index');
   },
 
   onreg:function(e){

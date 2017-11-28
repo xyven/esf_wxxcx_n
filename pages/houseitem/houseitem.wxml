@@ -13,6 +13,10 @@
     <view wx:if="{{item.onlet}}" class='htl-t-v'><text class='h-info-t'>单价:</text><text class='h-info-d'>{{item.unitprice}}</text></view>
     <view wx:if="{{item.onrent}}" class='htl-t-v'><text class='h-info-t'>租金:</text><text class='h-info-d'>{{item.totalprice}}</text></view>
   </view>
+  <view class='lable-share'>   
+   <image class='share-img' src='../icon/fenxiang.png'></image>
+   <text>点击分享</text>
+  </view>
   <view class='img-container' wx:for='{{pic}}' wx:key='{{index}}'>
     <image wx:if="{{item !=''}}" class="img" src="{{item}}"></image>
   </view>
