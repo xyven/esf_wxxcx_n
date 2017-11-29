@@ -17,3 +17,6 @@ const formatNumber = n => {
 module.exports = {
   formatTime: formatTime
 }
+
+var config = require('../config');
+ 

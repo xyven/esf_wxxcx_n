@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.5.4",
 	"appid": "wx91704bed6d3fdfac",
-	"projectname": "esf_wxxcx_n",
+	"projectname": "wxxcxclient",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,

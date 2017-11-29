@@ -30,7 +30,7 @@ Page({
       item: options,
       pic:options.pic.split(',')
     })
-    //console.log(options);
+    console.log(options);
   },
 
   toback:function(){
@@ -79,5 +79,12 @@ Page({
         }
       }
     })    
+  },
+
+  lookmore:function(e){ 
+    var that = this;
+    wx.redirectTo({
+      url: '../agentshop/agentshop?id=' + that.data.item.agentid
+    });
   }
 })

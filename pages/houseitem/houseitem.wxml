@@ -20,7 +20,12 @@
   <view class='img-container' wx:for='{{pic}}' wx:key='{{index}}'>
     <image wx:if="{{item !=''}}" class="img" src="{{item}}"></image>
   </view>
-  <button class="btn-connect" type='primary' bindtap='connectagent'>联系经纪人</button>
+  <view>
+    <button class="btn-connect" type='primary' bindtap='connectagent'>联系经纪人</button>
+    <button class="btn-connect" type='primary' bindtap='lookmore'>看更多房源</button>
+  </view>
+  
+
   <view class='tabbar'>
     <view class='css_btn clearfix' bindtap='toindex'>
       <image class='btn_img_d' src='../icon/shou.png'></image>
