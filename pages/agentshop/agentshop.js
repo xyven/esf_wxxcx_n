@@ -28,8 +28,7 @@ var gethousesbypage = function (agentid, pageindex, callback) {
       }
     }
   })
-} 
-
+}
 
 Page({
   /**
@@ -69,48 +68,8 @@ Page({
     searchkey:'',
     pageindx:1,
     searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
-    searchLoadingComplete: false  //“没有数据”的变量，默认false，隐藏
-  },
-
-  fetchSearchList:function(){
-    var that = this;
-    gethousesbypage(that.data.agentid, that.data.pageindx, function(res){
-      if (res.data.housetolet.length != 0) {
-        //有数据
-        var resultlist = [];
-        resultlist = that.data.housetolet.concat(res.data.housetolet);
-        //that.data.isfirstload ? resultlist = res.data.housetolet.slice(3) : resultlist = that.data.housetolet.concat(res.data.housetolet);
-        if (that.data.isfirstload) {
-          that.setData({
-            lstforswiper: res.data.housetolet.slice(0, 3),
-            lstforlet: resultlist,
-            lstforrent: res.data.housetorent,
-            numoflet: resultlist.length,
-            numofrent: res.data.housetorent.length,
-            agentid: res.data.agent.id,
-            'ischecked.agentid': res.data.agent.id,
-            agentname: res.data.agent.name,
-            agentphone: res.data.agent.telno,
-            qrcode: res.data.agent.qrcode,
-            isfirstload: false,
-            searchLoading: true
-          })
-        }
-        else {
-          that.setData({
-            lstforlet: resultlist,
-            searchLoading: true  //把上拉加载的变量设为true， 显示
-          })
-        }
-      }
-      else {
-        //没数据
-        that.setData({
-          searchLoadingComplete: true, //把“没有数据”设为true，显示  
-          searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
-        });
-      }
-    })
+    searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏
+    onloadlist:false
   },
 
   /**
@@ -127,41 +86,20 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        //判断是否有数据
-        if(res.data.housetolet.length!=0){
-          //有数据
-          var resultlist = [];
-          that.data.isfirstload ? resultlist = res.data.housetolet.slice(3) : resultlist = that.data.housetolet.concat(res.data.housetolet)
-          if (that.data.isfirstload){
-            that.setData({
-              lstforswiper: res.data.housetolet.slice(0, 3),
-              lstforlet: resultlist,
-              lstforrent: res.data.housetorent,
-              numoflet: resultlist.length,
-              numofrent: res.data.housetorent.length,
-              agentid: res.data.agent.id,
-              'ischecked.agentid': res.data.agent.id,
-              agentname: res.data.agent.name,
-              agentphone: res.data.agent.telno,
-              qrcode: res.data.agent.qrcode,
-              isfirstload:false,
-              searchLoading: true
-            })
-          }
-          else{
-            that.setData({
-              lstforlet: resultlist,
-              searchLoading: true  //把上拉加载的变量设为true， 显示
-            })
-          }          
-        }
-        else{
-          //没数据
-          that.setData({
-            searchLoadingComplete: true, //把“没有数据”设为true，显示  
-            searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
-          }); 
-        }
+        that.setData({
+          lstforswiper: res.data.housetolet.slice(0, 3),
+          lstforlet: res.data.housetolet.slice(3),
+          lstforrent: res.data.housetorent,
+          numoflet: res.data.housetolet.length,
+          numofrent: res.data.housetorent.length,
+          agentid: res.data.agent.id,
+          'ischecked.agentid': res.data.agent.id,
+          agentname: res.data.agent.name,
+          agentphone: res.data.agent.telno,
+          qrcode: res.data.agent.qrcode,
+          isfirstload: false,
+          searchLoading: true
+        })
         wx.setNavigationBarTitle({
           title: that.data.agentname+'的小程序微门店',
         })
@@ -172,19 +110,49 @@ Page({
     })   
   },
 
-  searchScrollLower: function () {
-    console.log('到底了');
+  searchScrollLower: function () {    
+    //console.log('到底了');
     var that = this;
+    if (that.data.onloadlist)
+      return;
+    //console.log(that.data);
     if (that.data.searchLoading && !that.data.searchLoadingComplete) {
       that.setData({
         pageindx: that.data.pageindx + 1,  //每次触发上拉事件，把searchPageNum+1  
         isfirstload: false, //触发到上拉事件，把isFromSearch设为为false
-        searchLoading: true   //把"上拉加载"的变量设为false，显示
+        searchLoading: true,  //把"上拉加载"的变量设为false，显示
+        onloadlist:true
       });
       that.fetchSearchList();
     }
   },
 
+  fetchSearchList: function (data) {
+    let that = this;
+    that.data.doesloadall = false;
+    gethousesbypage(that.data.agentid, that.data.pageindx, function (res) {
+      if (res.data.housetolet.length != 0) {
+        //有数据
+        var resultlist = [];
+        //console.log(that.data.lstforlet);
+        resultlist = that.data.lstforlet.concat(res.data.housetolet);
+        that.setData({
+          lstforlet: resultlist,
+          searchLoading: true,  //把上拉加载的变量设为true， 显示
+          onloadlist: false
+        })
+        
+      }
+      else {
+        //没数据
+        that.setData({
+          searchLoadingComplete: true, //把“没有数据”设为true，显示  
+          searchLoading: false,  //把"上拉加载"的变量设为false，隐藏 
+          onloadlist: false 
+        });
+      }
+    })
+  },
 
   //点击买房按钮
   tobuyhouse:function(){
@@ -219,7 +187,7 @@ Page({
 
   onhtmletitem:function(event){
     var that = this;
-    console.log(event);
+    //console.log(event);
     var hi = that.data.lstforlet[event.currentTarget.id];
     wx.navigateTo({
       url: '../houseitem/houseitem?' + parseParam(hi)
@@ -268,7 +236,7 @@ Page({
     that.setData({
       qrcode:'../icon/timg.jpg'
     })
-    console.log('1231');
+    //console.log('1231');
   },
 
   s_up10000:function(e){
@@ -284,8 +252,8 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        console.log(res.data);
-        console.log(res.data.length);
+        //console.log(res.data);
+        //console.log(res.data.length);
         that.setData({
           lstforlet: res.data
         })
@@ -401,7 +369,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        console.log(res)
+        //console.log(res)
         that.setData({
           lstforlet: res.data
         })
@@ -522,7 +490,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        console.log(res);
+        //console.log(res);
         that.setData({
           lstforlet: res.data
         })

@@ -79,6 +79,22 @@ Page({
     });
 
   },
+
+  onShareAppMessage: function () {
+    var that = this;
+    return {
+      title: '房天下二手房合作中介微门店',
+      path: 'pages/index/index',
+      imageUrl: '../icon/mainqrcode.jpg',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
+  
   getUserInfo: function(e) {
     //console.log(e)
     app.globalData.userInfo = e.detail.userInfo

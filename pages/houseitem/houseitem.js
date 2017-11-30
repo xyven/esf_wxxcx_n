@@ -52,8 +52,9 @@ Page({
    */
   onShareAppMessage: function () {
     var that=this;
+    console.log(this.data.item);
     return {
-      title: this.data.item.title + ',总价:'+ this.data.item.totalprice + ',单价:' + this.data.item.unitprice + '。',
+      title: this.data.item.estate + '/'+this.data.item.area+ '/' + this.data.item.struct +'/'+ this.data.item.totalprice +'/' + this.data.item.unitprice + '/' + this.data.item.fitment+this.data.item.title,
       path: 'pages/houseitem/houseitem?' + parseParam(this.data.item),
       imageUrl: that.data.pic[0],
       success: function (res) {
