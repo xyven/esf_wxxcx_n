@@ -69,14 +69,21 @@ Page({
     pageindx:1,
     searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
     searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏
-    onloadlist:false
+    onloadlist:false,
+    lastdate:'',
+    onfuzzysearch:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;   
+    var that = this; 
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();    
     wx.request({
       url: config.service.getallhouses,
       data: { 'agentid': options.id, 'pageindx' : that.data.pageindx }, //options.id  ym19870817
@@ -98,7 +105,8 @@ Page({
           agentphone: res.data.agent.telno,
           qrcode: res.data.agent.qrcode,
           isfirstload: false,
-          searchLoading: true
+          searchLoading: true,
+          lastdate:[year, month, day].join('-')
         })
         wx.setNavigationBarTitle({
           title: that.data.agentname+'的小程序微门店',
@@ -107,14 +115,16 @@ Page({
       fail: function () {
         console.log("request fail!")
       }
-    })   
-  },
+    });
+ },
 
-  searchScrollLower: function () {    
-    //console.log('到底了');
+  searchScrollLower: function () {     
     var that = this;
     if (that.data.onloadlist)
       return;
+    if (that.data.onfuzzysearch)
+      return;
+    console.log('到底了');
     //console.log(that.data);
     if (that.data.searchLoading && !that.data.searchLoadingComplete) {
       that.setData({
@@ -123,11 +133,12 @@ Page({
         searchLoading: true,  //把"上拉加载"的变量设为false，显示
         onloadlist:true
       });
+      console.log(that.data.pageindx);
       that.fetchSearchList();
     }
   },
 
-  fetchSearchList: function (data) {
+  fetchSearchList: function () {
     let that = this;
     that.data.doesloadall = false;
     gethousesbypage(that.data.agentid, that.data.pageindx, function (res) {
@@ -140,8 +151,7 @@ Page({
           lstforlet: resultlist,
           searchLoading: true,  //把上拉加载的变量设为true， 显示
           onloadlist: false
-        })
-        
+        })        
       }
       else {
         //没数据
@@ -150,6 +160,68 @@ Page({
           searchLoading: false,  //把"上拉加载"的变量设为false，隐藏 
           onloadlist: false 
         });
+      }
+    })
+  },
+
+  onblur: function (e) {
+    var that = this;
+    if (e.detail.value != '')
+      this.setData({
+        searchkey: e.detail.value,
+        searchLoadingComplete: true, //把“没有数据”设为true，显示  
+        searchLoading: false,  //把"上拉加载"的变量设为false，隐藏
+      });
+    else {
+      that.setData({
+        lstforlet:[],
+        pageindx: 1,
+        searchkey: e.detail.value,
+        searchLoading: true
+      });  
+      wx.request({
+        url: config.service.getallhouses,
+        data: { 'agentid': that.data.agentid, 'pageindx': that.data.pageindx }, //options.id  ym19870817
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            lstforlet: res.data.housetolet.slice(3),            
+            searchLoading: true,
+            searchLoadingComplete: false, //把“没有数据”设为false 不显示
+            onfuzzysearch: false,
+          })
+        },
+        fail: function () {
+          console.log("request fail!")
+        }
+      });
+    }
+  },
+
+  fuzzysearch: function (e) {
+    var that = this;
+    console.log(that.data.searchkey);
+    wx.request({
+      url: config.service.getallhouses + '/fuzzy',
+      data: { 'agentid': that.data.agentid, 'key': that.data.searchkey }, //options.id  ym19870817
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        //console.log(res);
+        that.setData({
+          lstforlet: res.data,
+          onfuzzysearch: true,
+          searchLoadingComplete: true
+        })
+      },
+      fail: function () {
+        console.log("request fail!")
       }
     })
   },
@@ -470,34 +542,5 @@ Page({
         console.log("request fail!")
       }
     })  
-  },
-
-  onblur:function(e){    
-    var that = this;
-    this.setData({
-      searchkey: e.detail.value
-    })
-  },
-
-  fuzzysearch:function(e){
-    var that = this;    
-    console.log(that.data.searchkey);
-    wx.request({
-      url: config.service.getallhouses + '/fuzzy',
-      data: { 'agentid': that.data.agentid, 'key': that.data.searchkey}, //options.id  ym19870817
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        //console.log(res);
-        that.setData({
-          lstforlet: res.data
-        })
-      },
-      fail: function () {
-        console.log("request fail!")
-      }
-    })
-  }
+  }  
 })

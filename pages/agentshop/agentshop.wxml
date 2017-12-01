@@ -40,16 +40,19 @@
     <view class='htl-item'>        
         <view style='position:relative'>
           <image class='htl-mimg-lable' wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
-          <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>          
-        </view>      
-        <view class='htl-txtinfo'>
-        <text class='htl-title'>{{item.title}}</text>
-        <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
-        <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
-        <text class='htl-info'>朝向:{{item.director}}\t装修:{{item.fitment}}</text>
-        <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text>  
-        <text class='htl-uptm'>上传时间:{{item.uptime}}</text>      
+          <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>
         </view>
+        <view class='htl-txtinfo'>
+          <view class='htl-title'>
+            <image wx:if="{{item.uptime == lastdate}}" src='../icon/new.png'></image>
+            <text>{{item.title}}</text>
+          </view>    
+          <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
+          <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
+          <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
+          <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text> 
+          <text class='htl-uptm'>上传时间:{{item.uptime}}</text>      
+        </view>        
     </view>
     <view class='part-line'></view>
   </view>

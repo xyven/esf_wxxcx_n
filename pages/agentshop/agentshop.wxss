@@ -164,7 +164,7 @@ view.text:before {
 .htl-mimg-lable{
   position:absolute;
   top: 10rpx;
-  right: -1rpx;
+  right: 0rpx;
   width: 50rpx;
   height: 50rpx;
   border-radius: 10rpx;
@@ -175,18 +175,26 @@ view.text:before {
   margin-left: 10rpx;
   padding-right: 10rpx;
   margin-top: 5rpx;
+  position: relative;
 }
-.htl-title{
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 22px; 
+.htl-title{   
+  float: left;
+}
+.htl-title image{
+  float: left;
+  width: 50rpx;
+  height: 50rpx;
+}
+.htl-title text{
+   font-size: 18px;
+   font-weight: bold;
 }
 .htl-info{
   font-size: 12px;
   line-height: 16px; 
 }
 .htl-price{
-  font-size: 14px;
+  font-size: 13px;
   line-height: 22px; 
   color: red;
 }
