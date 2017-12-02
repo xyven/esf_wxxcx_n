@@ -90,7 +90,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        console.log(res)
+        //console.log(res)
         that.setData({
           lstforswiper: res.data.housetolet.slice(0, 3),
           lstforlet: res.data.housetolet.slice(3),
@@ -122,7 +122,7 @@ Page({
       return;
     if (that.data.onfuzzysearch)
       return;
-    console.log('到底了');
+    //console.log('到底了');
     //console.log(that.data);
     if (that.data.searchLoading && !that.data.searchLoadingComplete) {
       that.setData({
@@ -131,7 +131,7 @@ Page({
         searchLoading: true,  //把"上拉加载"的变量设为false，显示
         onloadlist:true
       });
-      console.log(that.data.pageindx);
+      //console.log(that.data.pageindx);
       that.fetchSearchList();
     }
   },
@@ -185,7 +185,7 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
-          console.log(res)
+          //console.log(res)
           that.setData({
             lstforlet: res.data.housetolet.slice(3),            
             searchLoading: true,
@@ -202,7 +202,7 @@ Page({
 
   fuzzysearch: function (e) {
     var that = this;
-    console.log(that.data.searchkey);
+    //console.log(that.data.searchkey);
     wx.request({
       url: config.service.getallhouses + '/fuzzy',
       data: { 'agentid': that.data.agentid, 'key': that.data.searchkey }, //options.id  ym19870817
@@ -244,7 +244,7 @@ Page({
     wx.reLaunch({
       url: '../index/index',
     })
-    console.log('rt-index');
+    //console.log('rt-index');
   },
 
   tosalehouse:function(){
@@ -252,17 +252,27 @@ Page({
     wx.navigateTo({
       url: '../reg/reg?agentid=' + that.data.agentid,
     })
-    console.log('nt-reg');
+    //console.log('nt-reg');
   },
 
-  onhtmletitem:function(event){
+  onhtmletitem_swiper:function(event){
+    var that = this;
+    //console.log(event);
+    var hi = that.data.lstforswiper[event.currentTarget.id];
+    wx.navigateTo({
+      url: '../houseitem/houseitem?' + parseParam(hi)
+    });
+    //console.log('nt-houseletitem');
+  },
+
+  onhtmletitem: function (event) {
     var that = this;
     //console.log(event);
     var hi = that.data.lstforlet[event.currentTarget.id];
     wx.navigateTo({
       url: '../houseitem/houseitem?' + parseParam(hi)
     });
-    console.log('nt-houseletitem');
+    //console.log('nt-houseletitem');
   },
 
   onhtmrentitem: function (event) {
@@ -271,7 +281,7 @@ Page({
     wx.navigateTo({
       url: '../houseitem/houseitem?' + parseParam(hi)
     });
-    console.log('nt-houserentitem');
+    //console.log('nt-houserentitem');
   },
 
   /**
@@ -423,7 +433,7 @@ Page({
       fail: function () {
         console.log("request fail!")
       }
-    })  
+    })
   },
 
   s_200: function (e) {

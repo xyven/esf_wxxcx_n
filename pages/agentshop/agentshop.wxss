@@ -1,5 +1,4 @@
 /* pages/agentshop/agentshop.wxss */
-
 .sv{
   position: relative;
   flex: auto; 
@@ -29,6 +28,23 @@ swiper-item text{
                 0 1px white,
                 1px 0 white,
                 0 -1px white;
+}
+
+.top-label-container{
+  position: absolute;
+  float: left;
+}
+
+.lable-img{
+  float: left;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.lable-img-new{
+  float: left;
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .label-container{
@@ -94,16 +110,6 @@ swiper-item text{
   padding: 0rpx 5rpx 0rpx 5rpx;
 }
 
-
-
-.lable-img{
-  position: absolute;
-  top: -1rpx;
-  right: -1rpx;
-  width: 100rpx;
-  height: 100rpx;
-}
-
 view.text {
     display: flex;
     align-items: center;
@@ -160,14 +166,6 @@ view.text:before {
   border-radius: 10rpx;
   margin-top: 10rpx;
   margin-left: 10rpx;
-}
-.htl-mimg-lable{
-  position:absolute;
-  top: 10rpx;
-  right: 0rpx;
-  width: 50rpx;
-  height: 50rpx;
-  border-radius: 10rpx;
 }
 .htl-txtinfo{
   display: flex;

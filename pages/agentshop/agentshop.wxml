@@ -3,11 +3,14 @@
 <scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true"  scroll-into-view="{{toview}}" bindscrolltolower="searchScrollLower">  
   <swiper class="swiper_box" indicator-dots="{{indicatorDots}}"
    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
-    <view wx:for="{{lstforswiper}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>      
+    <view wx:for="{{lstforswiper}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem_swiper'>      
       <swiper-item>
         <text>{{item.title}}。总价：{{item.totalprice}}，单价：{{item.unitprice}}</text>
+        <view class='top-label-container'>
         <image wx:if="{{item.keywords=='急'}}" class='lable-img' src='../icon/ji.png'></image> 
-        <image src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>         
+        <image wx:if="{{item.uptime == lastdate}}" class='lable-img-new' src='../icon/new.png'></image>
+        </view>
+        <image src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>     
       </swiper-item>      
     </view>
   </swiper>
@@ -38,12 +41,12 @@
   </view>
   <view class='housetolet-list clearfix' wx:if="{{numoflet>0}}" wx:for="{{lstforlet}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
     <view class='htl-item'>        
-        <view style='position:relative'>
-          <image class='htl-mimg-lable' wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
+        <view style='position:relative'>          
           <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>
         </view>
         <view class='htl-txtinfo'>
           <view class='htl-title'>
+            <image wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
             <image wx:if="{{item.uptime == lastdate}}" src='../icon/new.png'></image>
             <text>{{item.title}}</text>
           </view>    
