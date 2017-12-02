@@ -80,10 +80,8 @@ Page({
   onLoad: function (options) {
     var that = this; 
     var date = new Date();
-    date.setDate(date.getDate() - 1);
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();    
+    date.setDate(date.getDate() - 1);  
+    //console.log(date.Format("yyyy-MM-dd"))
     wx.request({
       url: config.service.getallhouses,
       data: { 'agentid': options.id, 'pageindx' : that.data.pageindx }, //options.id  ym19870817
@@ -106,7 +104,7 @@ Page({
           qrcode: res.data.agent.qrcode,
           isfirstload: false,
           searchLoading: true,
-          lastdate:[year, month, day].join('-')
+          lastdate: date.Format("yyyy-MM-dd")
         })
         wx.setNavigationBarTitle({
           title: that.data.agentname+'的小程序微门店',

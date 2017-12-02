@@ -22,7 +22,7 @@ Page({
       url: '../logs/logs'
     })
   },
-  //点击头像
+  //点击列表进入微门店
   onTapAgent:function(event){
     //console.log(event)
     var that = this;
