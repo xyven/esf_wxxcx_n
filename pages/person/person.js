@@ -8,7 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo:null
+    userInfo:null,
+    code:null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    lstofhouse:[],
+    histories:[]
   },
 
   /**
@@ -18,10 +22,35 @@ Page({
       var that = this;
       if(app.globalData.userInfo){
         that.setData({
-          userInfo: app.globalData.userInfo
+          userInfo: app.globalData.userInfo,
+          code:app.globalData.code,
+          hasUserInfo: true
         })
         console.log(that.data.userInfo)
+      } else if (this.data.canIUse) {
+        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+        // 所以此处加入 callback 以防止这种情况
+        app.userInfoReadyCallback = res => {
+          this.setData({
+            userInfo: res.userInfo,
+            code: app.globalData.code,
+            hasUserInfo: true
+          })
+        }
+      } else {
+        // 在没有 open-type=getUserInfo 版本的兼容处理
+        wx.getUserInfo({
+          success: res => {
+            app.globalData.userInfo = res.userInfo
+            this.setData({
+              userInfo: res.userInfo,
+              code: app.globalData.code,
+              hasUserInfo: true
+            })
+          }
+        })
       }
+
   },
 
   /**

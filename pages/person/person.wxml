@@ -1,2 +1,62 @@
 <!--pages/person/person.wxml-->
-<text>pages/person/person.wxml</text>
+<view>
+  <view class='userinfo-v'>
+    <image  src='{{userInfo.avatarUrl}}'></image>
+    <text>{{userInfo.nickName}}</text>
+    <text>{{code}}</text>
+  </view>
+  <view>
+     <button>房天下入驻中介绑定</button>
+  </view>
+  <scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true">
+    <view class="flag-container clearfix"  id="htl_title">
+        <image class='flag-img' src='../icon/men.png'></image>
+        <text class='flag-text'>最新登记房源</text>
+    </view>
+    <view class='housetolet-list clearfix' wx:if="{{numoflet>0}}" wx:for="{{lstofhouse}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
+      <view class='htl-item'>        
+          <view style='position:relative'>          
+            <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>
+          </view>
+          <view class='htl-txtinfo'>
+            <view class='htl-title'>
+              <image wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
+              <image wx:if="{{item.uptime == lastdate}}" src='../icon/new.png'></image>
+              <text>{{item.title}}</text>
+            </view>    
+            <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
+            <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
+            <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
+            <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text> 
+            <text class='htl-uptm'>上传时间:{{item.uptime}}</text>      
+          </view>        
+      </view>
+    </view>    
+    <view  wx:if="{{lstofhouse.length==0}}">
+      <text>暂无出售房源</text>
+    </view>
+    <view class="flag-container clearfix"  id="htl_title">
+        <image class='flag-img' src='../icon/men.png'></image>
+        <text class='flag-text'>我的浏览足迹</text>
+    </view>
+    <view class='housetolet-list clearfix' wx:if="{{numoflet>0}}" wx:for="{{histories}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
+      <view class='htl-item'>        
+          <view style='position:relative'>          
+            <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>
+          </view>
+          <view class='htl-txtinfo'>
+            <view class='htl-title'>
+              <image wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
+              <image wx:if="{{item.uptime == lastdate}}" src='../icon/new.png'></image>
+              <text>{{item.title}}</text>
+            </view>    
+            <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
+            <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
+            <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
+            <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text> 
+            <text class='htl-uptm'>上传时间:{{item.uptime}}</text>      
+          </view>        
+      </view>
+    </view>
+  </scroll-view>
+</view>

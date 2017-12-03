@@ -1,1 +1,7 @@
 /* pages/person/person.wxss */
+@import "../agentshop/agentshop.wxss";
+.userinfo-v image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
