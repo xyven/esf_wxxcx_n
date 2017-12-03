@@ -205,7 +205,7 @@ view.text:before {
   position: fixed;
   bottom: 208rpx;
   right: 22rpx;
-  height: 300rpx;
+  /*height: 300rpx;*/
   flex-direction: column;
   display: flex;
   justify-content: space-between;  
@@ -218,11 +218,6 @@ view.text:before {
 }
 
 .css_btn image{
-  width: 70rpx;
-  height: 70rpx;
-}
-
-.btn_img_d{
   width: 70rpx;
   height: 70rpx;
 }

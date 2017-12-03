@@ -1,4 +1,5 @@
 /**index.wxss**/
+@import "../agentshop/agentshop.wxss";
 .sv{
   position: absolute;
   width: 100%;

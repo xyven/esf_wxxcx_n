@@ -1,16 +1,26 @@
 //app.js
+var config = require('./config');
+var qcloud = require('./vendor/qcloud-weapp-client-sdk/index');
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    qcloud.setLoginUrl(config.service.loginUrl); //设置客户端登录地址
     // 登录
+    var that = this;
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res)
+        // 登录成功 获取用户信息 并存入全局变量
+        that.globalData.islogin = true
+        wx.getUserInfo({
+          success: function (res) {
+            that.globalData.userInfo = res.userInfo;
+            console.log(res.userInfo);
+          }
+        })        
       }
     })
     // 获取用户信息
@@ -35,6 +45,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    islogin: false
   }
 })

@@ -3,9 +3,9 @@
     "pages/index/index",
     "pages/reg/reg",    
     "pages/agentshop/agentshop",
-    "pages/templates/templates",
     "pages/houseitem/houseitem", 
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/person/person"
   ],
   "window":{
     "backgroundTextStyle":"light",

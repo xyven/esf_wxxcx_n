@@ -550,5 +550,12 @@ Page({
         console.log("request fail!")
       }
     })  
+  },
+
+  toperson:function(e){
+    var that = this;
+    wx.navigateTo({
+      url: '../person/person'
+    })
   }  
 })

@@ -24,14 +24,21 @@
     <button class="btn-connect" type='primary' bindtap='connectagent'>联系经纪人</button>
     <button class="btn-connect" type='primary' bindtap='lookmore'>看更多房源</button>
   </view>
-  
 
   <view class='tabbar'>
+  <view class='css_btn clearfix' bindtap='toindex'>
+    </view>
     <view class='css_btn clearfix' bindtap='toindex'>
-      <image class='btn_img_d' src='../icon/shou.png'></image>
+      <image src='../icon/shou.png'></image>
     </view>
     <view class='css_btn clearfix' bindtap='toback'>
         <image src='../icon/fang.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='tosalehouse'>
+      <image src='../icon/deng.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='toperson'>
+      <image src='../icon/person.png'></image>
     </view>
   </view>
 </view>

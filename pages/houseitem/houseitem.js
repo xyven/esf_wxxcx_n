@@ -87,5 +87,12 @@ Page({
     wx.redirectTo({
       url: '../agentshop/agentshop?id=' + that.data.item.agentid
     });
-  }
+  },
+
+  toperson: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../person/person'
+    })
+  }  
 })

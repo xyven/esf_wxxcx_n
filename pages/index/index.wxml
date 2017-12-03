@@ -16,3 +16,20 @@
     </view>
   </view>
 </scroll-view>
+<view class='tabbar'>
+    <view class='css_btn clearfix'>
+ 
+    </view>
+    <view class='css_btn clearfix' >
+ 
+    </view>
+    <view class='css_btn clearfix' >
+ 
+    </view>
+    <view class='css_btn clearfix' >
+ 
+    </view>
+    <view class='css_btn clearfix' bindtap='toperson'>
+      <image src='../icon/person.png'></image>
+    </view>
+</view>

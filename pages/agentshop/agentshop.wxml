@@ -1,5 +1,4 @@
 <!--pages/agentshop/agentshop.wxml-->
-<view class='page_a'>
 <scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true"  scroll-into-view="{{toview}}" bindscrolltolower="searchScrollLower">  
   <swiper class="swiper_box" indicator-dots="{{indicatorDots}}"
    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
@@ -96,10 +95,9 @@
    </view>
 </view>
 </scroll-view>
-</view>
 <view class='tabbar'>
     <view class='css_btn clearfix' bindtap='toindex'>
-      <image class='btn_img_d' src='../icon/shou.png'></image>
+      <image src='../icon/shou.png'></image>
     </view>
     <view class='css_btn clearfix' bindtap='tobuyhouse'>
       <image src='../icon/mai.png'></image>
@@ -108,6 +106,9 @@
       <image src='../icon/zhu.png'></image>
     </view>
     <view class='css_btn clearfix' bindtap='tosalehouse'>
-      <image class='btn_img_d' src='../icon/deng.png'></image>
+      <image src='../icon/deng.png'></image>
+    </view>
+    <view class='css_btn clearfix' bindtap='toperson'>
+      <image src='../icon/person.png'></image>
     </view>
 </view>

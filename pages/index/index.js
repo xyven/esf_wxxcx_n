@@ -3,13 +3,13 @@
 const app = getApp()
 
 // 引入 QCloud 小程序增强 SDK
-//var qcloud = require('../../vendor/qcloud-weapp-client-sdk/index');
+var qcloud = require('../../vendor/qcloud-weapp-client-sdk/index');
 
 // 引入配置
 var config = require('../../config');
 
 Page({
-  data: {    
+  data: {
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -32,34 +32,8 @@ Page({
     });
     console.log('nt-shop');
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-    var that = this;
+  onLoad: function () {    
+    var that = this;    
     wx.request({
       url: config.service.getAgents,
       data: {},
@@ -77,7 +51,6 @@ Page({
         console.log("request fail!")
       }
     });
-
   },
 
   onShareAppMessage: function () {
@@ -102,5 +75,12 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+
+  toperson: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../person/person'
+    })
+  }  
 })
