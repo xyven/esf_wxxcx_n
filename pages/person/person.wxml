@@ -1,12 +1,13 @@
 <!--pages/person/person.wxml-->
 <view>
-  <view class='userinfo-v'>
+  <view class='userinfo-header '>
     <image  src='{{userInfo.avatarUrl}}'></image>
     <text>{{userInfo.nickName}}</text>
-    <text>{{code}}</text>
+    <button>房天下入驻中介绑定</button>
   </view>
   <view>
-     <button>房天下入驻中介绑定</button>
+  我是导航按钮
+     
   </view>
   <scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true">
     <view class="flag-container clearfix"  id="htl_title">

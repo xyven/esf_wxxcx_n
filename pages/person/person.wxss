@@ -1,6 +1,22 @@
 /* pages/person/person.wxss */
 @import "../agentshop/agentshop.wxss";
-.userinfo-v image{
+.userinfo-header{
+  display: flex;
+  flex-direction: row;
+  padding-top: 10rpx;
+  padding-left: 10rpx;
+  padding-bottom: 10rpx; 
+  border:1rpx solid #ff00ff;
+  vertical-align: middle;
+}
+
+.userinfo-header text{
+  border: 1rpx solid #dd0000;
+  vertical-align: middle;
+  font-size: 20rpx;
+}
+
+.userinfo-header image{
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
