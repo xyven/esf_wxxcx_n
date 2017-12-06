@@ -1,13 +1,29 @@
 <!--pages/reg/reghousetolet.wxml-->
-<view>
-<view class='title'>请登记出售/出租的房源</view>
-  <form bindsubmit='onreg'>
-    <view class='form-list'>
-      <radio-group bindchange="radioChange" name='letorrent'>
-        <radio class='input-title' checked='true' value='let'>出售</radio>
-        <radio value='rent'>出租</radio>
-      </radio-group>
+<view class='navigate-contariner'>
+    <view bindtap='toback'>
+      <image src='../icon/fang.png'></image>
+      <text class="{{'nav-text-normal'}}">返回</text>
     </view>
+    <view bindtap='tosalehouse'>
+      <image src='../icon/deng.png'></image>
+      <text class="{{letorrent== 'let'?'nav-text-checked':'nav-text-normal'}}">卖房</text>
+    </view>
+    <view bindtap='torenthouse'>
+      <image src='../icon/deng.png'></image>
+      <text class="{{letorrent== 'rent'?'nav-text-checked':'nav-text-normal'}}">出租</text>
+    </view>
+    <view bindtap='tobuyhouse'>
+      <image src='../icon/deng.png'></image>
+      <text class="{{letorrent== 'buy'?'nav-text-checked':'nav-text-normal'}}">买房</text>
+    </view>
+    <view bindtap='tohirehouse'>
+      <image src='../icon/deng.png'></image>
+      <text class="{{letorrent== 'hire'?'nav-text-checked':'nav-text-normal'}}">租房</text>
+    </view>
+</view>
+<view style='width:100%; height:135rpx'></view>
+<view>
+  <form bindsubmit='onreg'>
     <view class='form-list'>
       <view class='input-title'>小区名称:</view>
       <input class='input' name='resdarea' placeholder='请在这里输入' bindblur='onblur'>{{residentialareaname}}</input>
@@ -91,12 +107,4 @@
     </view>
     <button class='btn' form-type='submit' type='primary' size='default' isabled='false' >提交信息</button>
   </form>
-  <view class='tabbar'>
-    <view class='css_btn clearfix' bindtap='toindex'>
-      <image class='btn_img_d' src='../icon/shou.png'></image>
-    </view>
-    <view class='css_btn clearfix' bindtap='toback'>
-        <image src='../icon/fang.png'></image>
-    </view>
-  </view>
 </view>

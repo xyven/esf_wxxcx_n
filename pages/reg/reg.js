@@ -30,21 +30,39 @@ Page({
     phonenumber:'',
     facility:[],
     frequence:12,
-    agentid:''
+    agentid:'',
   },
 
   onLoad:function(option){
+    console.log(option);
     this.setData({
       agentid:option.agentid
     })
 
   },
 
-  //事件响应函数
-  radioChange:function(e){    
+  tosalehouse:function(e){
     this.setData({
-      letorrent:e.detail.value
-    });     
+      letorrent: 'let',
+    }); 
+  },
+
+  torenthouse: function (e) {
+    this.setData({
+      letorrent: 'rent',
+    });
+  },
+
+  tobuyhouse: function (e) {
+    this.setData({
+      letorrent: 'buy',
+    });
+  },
+
+  tohirehouse: function (e) {
+    this.setData({
+      letorrent: 'hire',
+    });
   },
 
   onblur:function(e){
@@ -136,17 +154,11 @@ Page({
   },
 
   toback: function () {
-    wx.navigateBack({
+    var that = this;
+    wx.redirectTo({
+      url: '../agentshop/agentshop?id=' + that.data.agentid
     });
     console.log('nb');
-  },
-
-  toindex: function () {
-    var that = this;
-    wx.reLaunch({
-      url: '../index/index'
-    });
-    console.log('r-index');
   },
 
   onreg:function(e){

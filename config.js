@@ -33,7 +33,10 @@ var config = {
         regnewhouse: `https://${host}/Reghouse`,
 
         //二维码
-        qrcode: `https://${host}/xcxqrcode/`
+        qrcode: `https://${host}/xcxqrcode/`,
+
+        //短信验证
+        telcheck: `https://${host}/telcheck/`
 
         }
 };

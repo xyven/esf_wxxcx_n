@@ -34,6 +34,12 @@
 					"name": "房源页面",
 					"pathName": "pages/person/person",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "登记页面",
+					"pathName": "pages/reg/reg",
+					"query": ""
 				}
 			]
 		}

@@ -1,6 +1,13 @@
 // pages/person/person.js
 //获取应用实例
 const app = getApp()
+var config = require('../../config');
+
+//倒计时
+var maxTime = 60
+var currentTime = maxTime //倒计时的事件（单位：s）  
+var interval = null
+var hintMsg = null // 提示  
 
 Page({
 
@@ -12,7 +19,10 @@ Page({
     code:null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     lstofhouse:[],
-    histories:[]
+    histories:[],
+    dobindagent:false,
+    time: currentTime,
+    sendenable:true
   },
 
   /**
@@ -51,6 +61,49 @@ Page({
         })
       }
 
+  },
+
+  bindagent:function(e){
+    console.log('bindagent');
+    var that = this;
+    that.setData({
+      dobindagent:true
+    })
+  },
+
+  sendPhoneNum:function(e){
+    console.log(e);
+    var that = this;
+    interval = setInterval(function () {
+      currentTime--;
+      that.setData({
+        time: currentTime,
+        sendenable:false
+      })
+
+      if (currentTime <= 0) {
+        clearInterval(interval)
+        currentTime = maxTime
+        that.setData({
+          time: currentTime,
+          sendenable: true
+        })
+      }
+    }, 1000);
+    //将手机号码发送的服务器
+    wx.request({
+      url: config.service.telcheck,
+      data: { 'code': this.data.code, 'tel': e.detail.value.tel },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          callback(res);
+        }
+      }
+    })
   },
 
   /**

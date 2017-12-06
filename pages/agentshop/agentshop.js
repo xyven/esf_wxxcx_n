@@ -71,7 +71,12 @@ Page({
     searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏
     onloadlist:false,
     lastdate:'',
-    onfuzzysearch:false
+    onfuzzysearch:false,
+    isindexchecked:false,
+    isletchecked:true,
+    isrentchecked:false,
+    isdengchecked:false,
+    isminechecked:false
   },
 
   /**
@@ -80,7 +85,8 @@ Page({
   onLoad: function (options) {
     var that = this; 
     var date = new Date();
-    date.setDate(date.getDate() - 1);  
+    date.setDate(date.getDate() - 1);
+    console.log(options);
     //console.log(date.Format("yyyy-MM-dd"))
     wx.request({
       url: config.service.getallhouses,
@@ -92,8 +98,7 @@ Page({
       success: function (res) {
         //console.log(res)
         that.setData({
-          lstforswiper: res.data.housetolet.slice(0, 3),
-          lstforlet: res.data.housetolet.slice(3),
+          lstforlet: res.data.housetolet,
           lstforrent: res.data.housetorent,
           numoflet: res.data.housetolet.length,
           numofrent: res.data.housetorent.length,
@@ -107,7 +112,7 @@ Page({
           lastdate: date.Format("yyyy-MM-dd")
         })
         wx.setNavigationBarTitle({
-          title: that.data.agentname+'的小程序微门店',
+          title: that.data.agentname + '的微门店(在售' + that.data.numoflet + '套出租' + that.data.numofrent+'套)',
         })
       },
       fail: function () {
@@ -228,19 +233,36 @@ Page({
   tobuyhouse:function(){
     var that = this;
     that.setData({
-      toview:'htl_title'
+      toview:'search',
+      isindexchecked: false,
+      isletchecked: true,
+      isrentchecked: false,
+      isdengchecked: false,
+      isminechecked: false
     })    
   },
 
   torenthouse:function(){
     var that=this;
     that.setData({
-      toview: 'htr_title'
+      toview: 'search',
+      isindexchecked: false,
+      isletchecked: false,
+      isrentchecked: true,
+      isdengchecked: false,
+      isminechecked: false
     })
   },
 
   toindex:function(){
     var that = this;
+    that.setData({
+      isindexchecked: true,
+      isletchecked: false,
+      isrentchecked: false,
+      isdengchecked: false,
+      isminechecked: false
+    })
     wx.reLaunch({
       url: '../index/index',
     })
@@ -249,7 +271,7 @@ Page({
 
   tosalehouse:function(){
     var that = this;
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../reg/reg?agentid=' + that.data.agentid,
     })
     //console.log('nt-reg');
@@ -554,6 +576,13 @@ Page({
 
   toperson:function(e){
     var that = this;
+    that.setData({
+      isindexchecked: false,
+      isletchecked: false,
+      isrentchecked: false,
+      isdengchecked: false,
+      isminechecked: true
+    })
     wx.navigateTo({
       url: '../person/person'
     })

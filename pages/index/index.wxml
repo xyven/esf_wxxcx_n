@@ -1,4 +1,27 @@
 <!--index.wxml-->
+<view class='navigate-contariner'>
+    <view bindtap='toindex'>
+      <image src='../icon/shou.png'></image>
+      <text class="{{isindexchecked?'nav-text-checked':'nav-text-normal'}}">门店</text>
+    </view>
+    <view bindtap='tobuyhouse'>
+      <image src='../icon/mai.png'></image>
+      <text class="{{isletchecked?'nav-text-checked':'nav-text-normal'}}">最新</text>
+    </view>
+    <view bindtap='torenthouse'>
+      <image src='../icon/zhu.png'></image>
+      <text class="{{isrentchecked?'nav-text-checked':'nav-text-normal'}}">急售</text>
+    </view>
+    <view bindtap='tosalehouse'>
+      <image src='../icon/deng.png'></image>
+      <text class="{{isdengchecked?'nav-text-checked':'nav-text-normal'}}">排行</text>
+    </view>
+    <view bindtap='toperson'>
+      <image src='../icon/person.png'></image>
+      <text class="{{isminechecked?'nav-text-checked':'nav-text-normal'}}">我的</text>
+    </view>
+</view>
+<view style='width:100%; height:135rpx'></view>
 <scroll-view class='sv' scroll-y="true"  scroll-with-animation="true" >  
   <view class='agent-list'>
     <view class='agent-item' wx:for="{{lst}}" data-num="{{index}}" bindtap='onTapAgent'  wx:key='id' id='{{index}}'>
@@ -16,20 +39,3 @@
     </view>
   </view>
 </scroll-view>
-<view class='tabbar'>
-    <view class='css_btn clearfix'>
- 
-    </view>
-    <view class='css_btn clearfix' >
- 
-    </view>
-    <view class='css_btn clearfix' >
- 
-    </view>
-    <view class='css_btn clearfix' >
- 
-    </view>
-    <view class='css_btn clearfix' bindtap='toperson'>
-      <image src='../icon/person.png'></image>
-    </view>
-</view>
