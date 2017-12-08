@@ -67,13 +67,15 @@ Page({
   },
 
   connectagent:function(e){
+    var that=this;
     wx.showModal({
       title:'提示',
       content: '确定拨打中介电话:' + this.data.item.agentphone,
       success: function (res) {
+        console.log(res);
         if (res.confirm) {
           wx.makePhoneCall({
-            phoneNumber: this.data.item.agentphone
+            phoneNumber: that.data.item.agentphone
           })
         } else if (res.cancel) {
           console.log('用户点击取消')
