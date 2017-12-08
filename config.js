@@ -36,7 +36,7 @@ var config = {
         qrcode: `https://${host}/xcxqrcode/`,
 
         //短信验证
-        telcheck: `https://${host}/telcheck/`
+        bindagnet: `https://${host}/bindagent/`
 
         }
 };

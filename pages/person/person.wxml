@@ -1,22 +1,28 @@
-<!--pages/person/person.wxml-->
+<!--pages/person/person.wxml  dobindagent-->
 <view wx:if='{{dobindagent}}' class='binddialog'>
-  <label>请输入在房天下注册的手机号码:</label>
-  <form bindsubmit='sendPhoneNum'>
-     <input name='tel' placeholder='请输入电话号码' type='text'></input>
-     <button form-type='submit' class='btn' size='mini' disabled='{{!sendenable}}' >发送验证码</button>
-     <label wx:if='{{!sendenable}}'>{{time}}秒后再试</label>
-  </form>  
-  <view><label>输入验证码:</label><input placeholder='请输入收到的验证码' type='text'></input></view>
-  <view><button class='btn' size='mini'>提交绑定</button></view>
+  <form bindsubmit='bindagent'>
+    <label>请输入在房天下注册的id:</label>
+    <input name='agentid' placeholder='请输id' type='text'></input>
+    <label>请输入在房天下注册的真实姓名:</label>
+    <input name='name' placeholder='请输入完整姓名' type='text'></input>
+    <label>请输入在房天下注册的手机号码:</label>  
+    <input name='telno' placeholder='请输入电话号码' type='text'></input>
+    <label>请输入邀请码:</label>  
+    <input name='code' placeholder='请输入邀请码' type='text'></input>
+    <button form-type='submit' size='mini' >绑定</button>
+    <button size='mini' bindtap='nobind' >返回</button>
+  </form>
 </view>
 <view style='background-color: #f5f5f5'>
   <view class='header-container '>
     <image  src='{{userInfo.avatarUrl}}'></image>
     <text>{{userInfo.nickName}}</text>
-    <button class='btn' size='mini' bindtap='bindagent'>中介绑定</button>
+    <button wx:if='{{!isbindagent}}' class='btn' size='mini' bindtap='tobindagent'>中介绑定</button>
+    <text wx:if='{{isbindagent}}'>身份:中介</text>
+    <text wx:if='{{!isbindagent}}'>身份:用户</text>
   </view>
   <view class='navigate-contariner-p'>
-    <view>
+    <view wx:if='{{isbindagent}}'>
       <image src='../icon/hr.png'></image>
       <text class='nav-text-normal'>登记房源</text>
     </view>
@@ -24,48 +30,18 @@
       <image src='../icon/zuji.png'></image>
       <text class='nav-text-normal'>浏览足迹</text>
     </view>
-    <view>
+    <view wx:if='{{!isbindagent}}'>
       <image src='../icon/wymf.png'></image>
       <text class='nav-text-normal'>智能推荐</text>
     </view>
-    <view>
+    <view wx:if='{{isbindagent}}'>
       <image src='../icon/dpsz.png'></image>
       <text class='nav-text-normal'>微店设置</text>
     </view>     
   </view>
   <scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true">
-    <view class='housetolet-list clearfix' wx:if="{{numoflet>0}}" wx:for="{{lstofhouse}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
-      <view class='htl-item'>        
-          <view style='position:relative'>          
-            <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>
-          </view>
-          <view class='htl-txtinfo'>
-            <view class='htl-title'>
-              <image wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
-              <image wx:if="{{item.uptime == lastdate}}" src='../icon/new.png'></image>
-              <text>{{item.title}}</text>
-            </view>    
-            <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
-            <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
-            <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
-            <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text> 
-            <text class='htl-uptm'>上传时间:{{item.uptime}}</text>      
-          </view>        
-      </view>
-    </view>    
-    <view  wx:if="{{lstofhouse.length==0}}">
-      <text>暂无出售房源</text>
-    </view>
+  <!--登记房源-->
+  <!--浏览足迹-->
+  <!--微店设置-->
   </scroll-view>
-  <view class="flag-container clearfix" id="htr_title">
-    <image class='flag-img' src='../icon/wmen.png'></image>
-    <text class='flag-text'>门店分享</text>
-  </view>
-    <view class='htl-item'>
-    <view><image class='qrcode' src='{{qrcode}}' bindtap="previewImage" binderror='errorloadimg'></image></view>
-    <view class='htl-txtinfo' style='padding-top:40rpx'>
-    <text  class='htl-info'>房天下付费会员或正式加入测试用户可获得专用小程序码，通过分享小程序码可在朋友圈分享自己的微门店。</text>
-    <text class='htl-price'>欢迎致电8880000咨询申请测试资格。</text>
-    </view>
-  </view>
 </view>

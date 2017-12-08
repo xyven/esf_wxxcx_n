@@ -12,6 +12,10 @@
   padding-top: 50rpx;
 }
 
+.binddialog form{
+  padding-left: 50rpx;
+}
+
 .binddialog view{
   display: flex;
   flex-direction: row;
@@ -28,9 +32,15 @@
     font-size: 25rpx;
 }
 
+.binddialog button{
+  background-color:#f39d00;
+  margin-left:20rpx;
+  margin-top:20rpx;
+}
+
 .btn{
   background-color:#f39d00;
-  margin-left:20rpx
+  margin-left:20rpx;
 }
 
 .navigate-contariner-p{

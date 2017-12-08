@@ -1,10 +1,11 @@
 <!--index.wxml-->
+<import src="../templates.wxml"/>
 <view class='navigate-contariner'>
-    <view bindtap='toindex'>
+    <view bindtap='getagentlist'>
       <image src='../icon/shou.png'></image>
       <text class="{{isindexchecked?'nav-text-checked':'nav-text-normal'}}">门店</text>
     </view>
-    <view bindtap='tobuyhouse'>
+    <view bindtap='getnewhouses'>
       <image src='../icon/mai.png'></image>
       <text class="{{isletchecked?'nav-text-checked':'nav-text-normal'}}">最新</text>
     </view>
@@ -22,8 +23,9 @@
     </view>
 </view>
 <view style='width:100%; height:135rpx'></view>
-<scroll-view class='sv' scroll-y="true"  scroll-with-animation="true" >  
-  <view class='agent-list'>
+<scroll-view class='sv' scroll-y="true"  scroll-with-animation="true" >
+  <!--中介列表-->
+  <view wx:if="{{maincontant=='agents'}}" class='agent-list'>
     <view class='agent-item' wx:for="{{lst}}" data-num="{{index}}" bindtap='onTapAgent'  wx:key='id' id='{{index}}'>
         <image class='agent-img' src='{{item.pic}}'></image>
         <view class='agent-info-txt1'>
@@ -37,5 +39,9 @@
           
         </view>
     </view>
+  </view>
+  <!--新房列表-->
+  <view class='housetolet-list clearfix' wx:if="{{lstofnews.length>0}}" wx:for="{{lstofnews}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
+    <template wx:if="{{maincontant=='newhouses'}}" is="house-list-item" data="{{item}}"/>
   </view>
 </scroll-view>

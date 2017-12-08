@@ -3,11 +3,6 @@
 const app = getApp()
 var config = require('../../config');
 
-//倒计时
-var maxTime = 60
-var currentTime = maxTime //倒计时的事件（单位：s）  
-var interval = null
-var hintMsg = null // 提示  
 
 Page({
 
@@ -21,8 +16,8 @@ Page({
     lstofhouse:[],
     histories:[],
     dobindagent:false,
-    time: currentTime,
-    sendenable:true
+    sendenable:true,
+    isbindagent:false
   },
 
   /**
@@ -60,10 +55,27 @@ Page({
           }
         })
       }
+      //判断是否绑定
+      var that = this;
+      wx.request({
+        url: config.service.bindagnet + 'check',
+        data: {
+          'wxcode': that.data.code,
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          if(res.data!='')
+          that.setData({
+            isbindagent:true                                                                                          
+          })
+        }
+      })
+    },
 
-  },
-
-  bindagent:function(e){
+  tobindagent:function(e){
     console.log('bindagent');
     var that = this;
     that.setData({
@@ -71,38 +83,40 @@ Page({
     })
   },
 
-  sendPhoneNum:function(e){
-    console.log(e);
-    var that = this;
-    interval = setInterval(function () {
-      currentTime--;
-      that.setData({
-        time: currentTime,
-        sendenable:false
-      })
-
-      if (currentTime <= 0) {
-        clearInterval(interval)
-        currentTime = maxTime
-        that.setData({
-          time: currentTime,
-          sendenable: true
-        })
-      }
-    }, 1000);
-    //将手机号码发送的服务器
+  bindagent:function(e){    
+    var that=this;
     wx.request({
-      url: config.service.telcheck,
-      data: { 'code': this.data.code, 'tel': e.detail.value.tel },
+      url: config.service.bindagnet,
+      data: {
+        'agentid': e.detail.value['agentid'],
+        'name': e.detail.value['name'],
+        'telno': e.detail.value['telno'],
+        'code': e.detail.value['code'],
+        'wxcode': that.data.code,
+      },
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          callback(res);
+          wx.showToast({
+            title: '绑定成功',
+            icon: 'success',
+            duration: 2000
+          })
+          that.setData({
+            dobindagent:false
+          })
         }
       }
+    })
+  },
+
+  nobind:function(e){
+    var that = this;
+    that.setData({
+      dobindagent:false
     })
   },
 

@@ -14,7 +14,9 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     lst: [],
-    agentid:""
+    agentid:"",
+    lstofnews:[],
+    maincontant:'agents'
   },
   //事件处理函数
   bindViewTap: function() {
@@ -22,6 +24,44 @@ Page({
       url: '../logs/logs'
     })
   },
+
+  getnewhouses:function(){
+    var that=this;
+    wx.request({
+      url: config.service.getallhouses + '/getnewhouses',
+      data: {},
+      method: 'GET',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          lstofnews: res.data,
+          maincontant: 'newhouses'
+        })
+      },
+      fail: function () {
+        console.log("request fail!")
+      }
+    })
+  },
+
+  getagentlist:function(){
+    var that=this;
+    if(that.data.lst.length>0)
+    {
+      that.setData({
+        maincontant: 'agents'
+      })
+    }
+    else
+    {
+      that.onLoad();
+    }
+  },
+
+
   //点击列表进入微门店
   onTapAgent:function(event){
     //console.log(event)
@@ -50,7 +90,7 @@ Page({
       fail:function(){
         console.log("request fail!")
       }
-    });
+    })
   },
 
   onShareAppMessage: function () {
