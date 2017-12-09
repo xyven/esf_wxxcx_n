@@ -1,13 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
 // 引入 QCloud 小程序增强 SDK
 var qcloud = require('../../vendor/qcloud-weapp-client-sdk/index');
-
 // 引入配置
 var config = require('../../config');
-
+var util = require('../../utils/util.js');
 Page({
   data: {
     userInfo: {},
@@ -16,7 +14,9 @@ Page({
     lst: [],
     agentid:"",
     lstofnews:[],
-    maincontant:'agents'
+    lstofji:[],
+    maincontant:'agents',
+    toview:0
   },
   //事件处理函数
   bindViewTap: function() {
@@ -27,24 +27,68 @@ Page({
 
   getnewhouses:function(){
     var that=this;
-    wx.request({
-      url: config.service.getallhouses + '/getnewhouses',
-      data: {},
-      method: 'GET',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        console.log(res);
-        that.setData({
-          lstofnews: res.data,
-          maincontant: 'newhouses'
-        })
-      },
-      fail: function () {
-        console.log("request fail!")
-      }
-    })
+    if (that.data.lstofnews.length>0)
+    {
+      that.setData({
+        maincontant: 'newhouses',
+        toview:0
+      })
+    }
+    else
+    {
+      wx.request({
+        url: config.service.getallhouses + '/getnewhouses',
+        data: {},
+        method: 'GET',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          console.log(res);
+          that.setData({
+            lstofnews: res.data,
+            maincontant: 'newhouses',
+            toview: 0
+          })
+        },
+        fail: function () {
+          console.log("request fail!")
+        }
+      })
+    }      
+  },
+
+  gethousesji: function () {
+    var that = this;
+    if(that.data.lstofji.length>0)
+    {
+      that.setData({
+        maincontant: 'jihouses',
+        toview: 0
+      })
+    }
+    else
+    {
+      wx.request({
+        url: config.service.getallhouses + '/gethousesji',
+        data: {},
+        method: 'GET',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          console.log(res);
+          that.setData({
+            lstofji: res.data,
+            maincontant: 'jihouses',
+            toview: 0
+          })
+        },
+        fail: function () {
+          console.log("request fail!")
+        }
+      })
+    }      
   },
 
   getagentlist:function(){
@@ -52,7 +96,8 @@ Page({
     if(that.data.lst.length>0)
     {
       that.setData({
-        maincontant: 'agents'
+        maincontant: 'agents',
+        toview: 0
       })
     }
     else
@@ -61,17 +106,17 @@ Page({
     }
   },
 
-
   //点击列表进入微门店
   onTapAgent:function(event){
     //console.log(event)
     var that = this;
     var idx = event.currentTarget.id;
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../agentshop/agentshop?id=' + that.data.lst[idx].id
     });
     console.log('nt-shop');
   },
+
   onLoad: function () {    
     var that = this;    
     wx.request({
@@ -84,7 +129,8 @@ Page({
       success:function(res){
         //console.log(res)
         that.setData({
-            lst:res.data
+            lst:res.data,
+            toview: 0           
             })
       },
       fail:function(){
@@ -107,6 +153,27 @@ Page({
       }
     }
   },
+
+  onhtmletitem: function (event) {
+    var that = this;
+    //console.log(event);
+    var hi = that.data.lstofnews[event.currentTarget.id];
+    wx.navigateTo({
+      url: '../houseitem/houseitem?' + util.parseParam(hi)
+    });
+    //console.log('nt-houseletitem');
+  },
+
+  onhtmletitem_j: function (event) {
+    var that = this;
+    //console.log(event);
+    var hi = that.data.lstofji[event.currentTarget.id];
+    wx.navigateTo({
+      url: '../houseitem/houseitem?' + util.parseParam(hi)
+    });
+    //console.log('nt-houseletitem');
+  },
+  
   
   getUserInfo: function(e) {
     //console.log(e)
@@ -122,5 +189,5 @@ Page({
     wx.navigateTo({
       url: '../person/person'
     })
-  }  
+  }
 })

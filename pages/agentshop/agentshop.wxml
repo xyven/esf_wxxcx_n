@@ -1,4 +1,5 @@
 <!--pages/agentshop/agentshop.wxml-->
+<import  src="../templates.wxml"/>
 <view class='navigate-contariner'>
     <view bindtap='toindex'>
       <image src='../icon/shou.png'></image>
@@ -22,7 +23,7 @@
     </view>
 </view>
 <view style='width:100%; height:135rpx'></view>
-<scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true"  scroll-into-view="{{toview}}" bindscrolltolower="searchScrollLower">
+<scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true"  scroll-top="{{toview}}" bindscrolltolower="searchScrollLower">
     <view class="flag-container clearfix" >
       <view class='search-container'>
         <label>模糊搜索:</label>
@@ -44,46 +45,21 @@
         <view class="{{ischecked.room3?'label-select-c':'label-select-n'}}" bindtap='s_3room'><text>3室以上</text></view>
       </view> 
     </view>
-  
-  <view class='housetolet-list clearfix' wx:if="{{numoflet>0 && isletchecked}}" wx:for="{{lstforlet}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
-    <view class='htl-item'>        
-        <view style='position:relative'>          
-          <image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image>
-        </view>
-        <view class='htl-txtinfo'>
-          <view class='htl-title'>
-            <image wx:if="{{item.keywords=='急'}}" src='../icon/ji.png'></image>
-            <image wx:if="{{item.uptime == lastdate}}" src='../icon/new.png'></image>
-            <text>{{item.title}}</text>
-          </view>    
-          <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
-          <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
-          <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
-          <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text> 
-          <text class='htl-uptm'>上传时间:{{item.uptime}}</text>      
-        </view>        
-    </view>
+  <!--出售列表-->
+  <view class='housetolet-list clearfix' wx:if="{{numoflet>0 && maincontent=='let'}}" wx:for="{{lstforlet}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
+    <template  is="house-list-item" data="{{item}}"/>
     <view class='part-line'></view>
   </view>
-  <view  wx:if="{{numoflet==0  && isletchecked}}">
+  <view  wx:if="{{numoflet==0  && maincontent=='let'}}">
     <text>暂无出售房源</text>
   </view>
-  <view class="loading" wx:if="{{isletchecked}}" hidden="{{!searchLoading}}">正在载入更多...</view>  
-  <view class="loading complete" wx:if="{{isletchecked}}" hidden="{{!searchLoadingComplete}}">已加载全部</view> 
-  <view class='housetolet-list' wx:if="{{numofrent>0 && isrentchecked}}" wx:for="{{lstforrent}}" wx:key="id" id="{{index}}" bindtap='onhtmrentitem'>
-    <view class='htl-item'>
-        <view><image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image></view>      
-        <view class='htl-txtinfo'>
-        <text class='htl-title'>{{item.title}}</text>
-        <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
-        <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
-        <text class='htl-info'>朝向:{{item.director}}\t装修:{{item.fitment}}</text>
-        <text class='htl-price'>总价:{{item.totalprice}}</text>
-        <text class='htl-uptm'>上传时间:{{item.uptime}}</text>
-        </view>
-    </view>
+  <view class="loading" wx:if="{{maincontent=='let'}}" hidden="{{!searchLoading}}">正在载入更多...</view>  
+  <view class="loading complete" wx:if="{{maincontent=='let'}}" hidden="{{!searchLoadingComplete}}">已加载全部</view> 
+  <!--出租列表-->
+  <view class='housetolet-list' wx:if="{{numofrent>0 && maincontent=='rent'}}" wx:for="{{lstforrent}}" wx:key="id" id="{{index}}" bindtap='onhtmrentitem'>
+  <template is="house-list-item-r" data="{{item}}"/>
   </view>
-  <view class='loading' wx:if="{{numofrent==0  && isrentchecked}}">
+  <view class='loading' wx:if="{{numofrent==0  && maincontent=='rent'}}">
     <text>暂无出租房源</text>
   </view>
 </scroll-view>

@@ -44,7 +44,7 @@ Page({
   tosalehouse:function(e){
     this.setData({
       letorrent: 'let',
-    }); 
+    });
   },
 
   torenthouse: function (e) {
@@ -155,9 +155,8 @@ Page({
 
   toback: function () {
     var that = this;
-    wx.redirectTo({
-      url: '../agentshop/agentshop?id=' + that.data.agentid
-    });
+    wx.navigateBack({      
+    })
     console.log('nb');
   },
 

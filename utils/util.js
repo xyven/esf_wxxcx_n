@@ -15,7 +15,8 @@ const formatNumber = n => {
 }
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  parseParam: parseParam
 }
 
 // 对Date的扩展，将 Date 转化为指定格式的String
@@ -42,4 +43,15 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 //var time1 = new Date().Format("yyyy-MM-dd");
 //var time2 = new Date().Format("yyyy-MM-dd HH:mm:ss");
+function parseParam(param, key) {
+  var paramStr = "";
+  if (param instanceof String || param instanceof Number || param instanceof Boolean) {
+    paramStr += "&" + key + "=" + encodeURIComponent(param);
+  } else {
+    for (var i in param) {
+      paramStr += '&' + i + "=" + param[i];
+    };
+  }
+  return paramStr.substr(1);
+};
  

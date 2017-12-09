@@ -22,22 +22,26 @@
     <text wx:if='{{!isbindagent}}'>身份:用户</text>
   </view>
   <view class='navigate-contariner-p'>
-    <view wx:if='{{isbindagent}}'>
-      <image src='../icon/hr.png'></image>
-      <text class='nav-text-normal'>登记房源</text>
+    <view bindtap='toback'>
+      <image src='../icon/fang.png'></image>
+      <text class="{{'nav-text-normal'}}">返回</text>
     </view>
     <view>
       <image src='../icon/zuji.png'></image>
-      <text class='nav-text-normal'>浏览足迹</text>
+      <text class='nav-text-normal'>足迹</text>
+    </view>
+    <view wx:if='{{isbindagent}}'>
+      <image src='../icon/hr.png'></image>
+      <text class='nav-text-normal'>委托</text>
     </view>
     <view wx:if='{{!isbindagent}}'>
       <image src='../icon/wymf.png'></image>
-      <text class='nav-text-normal'>智能推荐</text>
+      <text class='nav-text-normal'>推荐</text>
     </view>
     <view wx:if='{{isbindagent}}'>
       <image src='../icon/dpsz.png'></image>
-      <text class='nav-text-normal'>微店设置</text>
-    </view>     
+      <text class='nav-text-normal'>设置</text>
+    </view> 
   </view>
   <scroll-view class="sv"  scroll-y="true"  scroll-with-animation="true">
   <!--登记房源-->

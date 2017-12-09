@@ -2,21 +2,10 @@
 const App=getApp()
 var config = require('../../config');
 var util = require('../../utils/util.js');
-var parseParam = function (param, key) {
-  var paramStr = "";
-  if (param instanceof String || param instanceof Number || param instanceof Boolean)   {
-    paramStr += "&" + key + "=" + encodeURIComponent(param);
-  } else {
-    for(var i in param){
-      paramStr += '&' + i + "=" + param[i];
-    };
-  }
-  return paramStr.substr(1);
-};
 
 var gethousesbypage = function (agentid, pageindex, callback) {
   wx.request({
-    url: config.service.getallhouses,
+    url: config.service.getallhouses+'/pagedata',
     data: { 'agentid': agentid, 'pageindx': pageindex },
     method: 'POST',
     header: {
@@ -50,7 +39,7 @@ Page({
     interval: 3000,
     duration: 1000,
     circular:true,
-    toview:'htl_title',
+    toview:0,
     qrcode: '../icon/timg.jpg',
     ischecked:{
       agentid: '',
@@ -72,11 +61,7 @@ Page({
     onloadlist:false,
     lastdate:'',
     onfuzzysearch:false,
-    isindexchecked:false,
-    isletchecked:true,
-    isrentchecked:false,
-    isdengchecked:false,
-    isminechecked:false
+    maincontent:'let'
   },
 
   /**
@@ -233,35 +218,23 @@ Page({
   tobuyhouse:function(){
     var that = this;
     that.setData({
-      toview:'search',
-      isindexchecked: false,
-      isletchecked: true,
-      isrentchecked: false,
-      isdengchecked: false,
-      isminechecked: false
+      toview:0,
+      maincontent: 'let'
     })    
   },
 
   torenthouse:function(){
     var that=this;
     that.setData({
-      toview: 'search',
-      isindexchecked: false,
-      isletchecked: false,
-      isrentchecked: true,
-      isdengchecked: false,
-      isminechecked: false
+      toview: 0,
+      maincontent: 'rent'
     })
   },
 
   toindex:function(){
     var that = this;
     that.setData({
-      isindexchecked: true,
-      isletchecked: false,
-      isrentchecked: false,
-      isdengchecked: false,
-      isminechecked: false
+      maincontent: 'index'
     })
     wx.reLaunch({
       url: '../index/index',
@@ -271,7 +244,7 @@ Page({
 
   tosalehouse:function(){
     var that = this;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../reg/reg?agentid=' + that.data.agentid,
     })
     //console.log('nt-reg');
@@ -282,7 +255,7 @@ Page({
     //console.log(event);
     var hi = that.data.lstforswiper[event.currentTarget.id];
     wx.navigateTo({
-      url: '../houseitem/houseitem?' + parseParam(hi)
+      url: '../houseitem/houseitem?' + util.parseParam(hi)
     });
     //console.log('nt-houseletitem');
   },
@@ -292,7 +265,7 @@ Page({
     //console.log(event);
     var hi = that.data.lstforlet[event.currentTarget.id];
     wx.navigateTo({
-      url: '../houseitem/houseitem?' + parseParam(hi)
+      url: '../houseitem/houseitem?' + util.parseParam(hi)
     });
     //console.log('nt-houseletitem');
   },
@@ -301,7 +274,7 @@ Page({
     var that = this;
     var hi = that.data.lstforrent[event.currentTarget.id];
     wx.navigateTo({
-      url: '../houseitem/houseitem?' + parseParam(hi)
+      url: '../houseitem/houseitem?' + util.parseParam(hi)
     });
     //console.log('nt-houserentitem');
   },

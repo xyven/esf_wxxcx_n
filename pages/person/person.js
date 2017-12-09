@@ -3,7 +3,6 @@
 const app = getApp()
 var config = require('../../config');
 
-
 Page({
 
   /**
@@ -69,10 +68,29 @@ Page({
         success: function (res) {
           if(res.data!='')
           that.setData({
-            isbindagent:true                                                                                          
+            isbindagent:true                                                        
           })
         }
       })
+      //加载足迹
+      wx.login({
+        success:function(res){
+          wx.request({
+            url: config.service.bindagnet + 'loadfootprint',
+            data: {
+              'wxcode': res.code,
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              console.log(res);
+            }
+          })
+        }
+      })
+      
     },
 
   tobindagent:function(e){
@@ -117,6 +135,11 @@ Page({
     var that = this;
     that.setData({
       dobindagent:false
+    })
+  },
+
+  toback:function(){
+    wx.navigateBack({      
     })
   },
 

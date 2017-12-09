@@ -1,5 +1,20 @@
 <!--pages/houseitem/houseitem.wxml-->
 <view>
+<view class='navigate-contariner'>
+    <view bindtap='toback'>
+      <image src='../icon/fang.png'></image>
+      <text class="{{'nav-text-normal'}}">返回</text>
+    </view>
+    <view bindtap='toagentshop'>
+      <image src='../icon/shop.png'></image>
+      <text class="{{maincontant=='agents'?'nav-text-checked':'nav-text-normal'}}">门店</text>
+    </view>    
+    <view bindtap='toperson'>
+      <image src='../icon/person.png'></image>
+      <text class="{{isminechecked?'nav-text-checked':'nav-text-normal'}}">我的</text>
+    </view>
+</view>
+<view style='width:100%; height:135rpx'></view>
   <view class='title'>{{item.title}}</view>
   <view class='htl-txtinfo'>
     <view class='htl-t-v'><text class='h-info-t'>小区:</text><text class='h-info-d'>{{item.estate}}</text></view>
@@ -23,22 +38,5 @@
   <view>
     <button class="btn-connect" type='primary' bindtap='connectagent'>联系经纪人</button>
     <button class="btn-connect" type='primary' bindtap='lookmore'>看更多房源</button>
-  </view>
-
-  <view class='tabbar'>
-  <view class='css_btn clearfix' bindtap='toindex'>
-    </view>
-    <view class='css_btn clearfix' bindtap='toindex'>
-      <image src='../icon/shou.png'></image>
-    </view>
-    <view class='css_btn clearfix' bindtap='toback'>
-        <image src='../icon/fang.png'></image>
-    </view>
-    <view class='css_btn clearfix' bindtap='tosalehouse'>
-      <image src='../icon/deng.png'></image>
-    </view>
-    <view class='css_btn clearfix' bindtap='toperson'>
-      <image src='../icon/person.png'></image>
-    </view>
   </view>
 </view>

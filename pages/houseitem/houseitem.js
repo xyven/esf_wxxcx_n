@@ -1,15 +1,6 @@
-// pages/houseitem/houseitem.js
-var parseParam = function (param, key) {
-  var paramStr = "";
-  if (param instanceof String || param instanceof Number || param instanceof Boolean) {
-    paramStr += "&" + key + "=" + encodeURIComponent(param);
-  } else {
-    for (var i in param) {
-      paramStr += '&' + i + "=" + param[i];
-    };
-  }
-  return paramStr.substr(1);
-};
+const app = getApp()
+var config = require('../../config');
+var util = require('../../utils/util.js');
 
 Page({
 
@@ -26,17 +17,33 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log(options);
     that.setData({
       item: options,
       pic:options.pic.split(',')
     })
-    console.log(options);
+    //上报足迹
+    wx.login({
+      success:function(res){
+        wx.request({
+          url: config.service.bindagnet + 'updatefootprint',
+          data: { 'wxcode': res.code, 'houseid': that.data.item.id, 'agentid': that.data.item.agentid },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            console.log(res);
+          }
+        })
+      }
+    })        
+    console.log(app.globalData.userInfo);
   },
 
   toback:function(){
     wx.navigateBack({      
     });
-    console.log('nb');
   },
 
   toindex: function () {
@@ -55,7 +62,7 @@ Page({
     console.log(this.data.item);
     return {
       title: this.data.item.estate + '/'+this.data.item.area+ '/' + this.data.item.struct +'/'+ this.data.item.totalprice +'/' + this.data.item.unitprice + '/' + this.data.item.fitment+this.data.item.title,
-      path: 'pages/houseitem/houseitem?' + parseParam(this.data.item),
+      path: 'pages/houseitem/houseitem?' + util.parseParam(this.data.item),
       imageUrl: that.data.pic[0],
       success: function (res) {
         // 转发成功
@@ -96,5 +103,12 @@ Page({
     wx.navigateTo({
       url: '../person/person'
     })
-  }  
+  },
+
+  toagentshop:function(){
+    var that=this;
+    wx.reLaunch({
+      url: '../agentshop/agentshop?id=' + that.data.item.agentid
+    })
+  } 
 })

@@ -36,7 +36,7 @@ var config = {
         qrcode: `https://${host}/xcxqrcode/`,
 
         //短信验证
-        bindagnet: `https://${host}/bindagent/`
+        bindagnet: `https://${host}/bindagent/`,
 
         }
 };
