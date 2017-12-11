@@ -144,7 +144,7 @@ Page({
     return {
       title: '房天下二手房合作中介微门店',
       path: 'pages/index/index',
-      imageUrl: '../icon/mainqrcode.jpg',
+      imageUrl: '../icon/timg.jpg',
       success: function (res) {
         // 转发成功
       },

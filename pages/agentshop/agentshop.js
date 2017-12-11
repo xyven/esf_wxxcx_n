@@ -97,7 +97,7 @@ Page({
           lastdate: date.Format("yyyy-MM-dd")
         })
         wx.setNavigationBarTitle({
-          title: that.data.agentname + '的微门店(在售' + that.data.numoflet + '套出租' + that.data.numofrent+'套)',
+          title: that.data.agentname + '的微门店',
         })
       },
       fail: function () {

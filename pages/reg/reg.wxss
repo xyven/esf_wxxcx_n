@@ -63,3 +63,12 @@
   margin-left: 16rpx;
   margin-right: 16rpx;
 }
+
+.tip{
+  text-align: center;
+}
+
+.tip text{
+  font-size: 12rpx;
+  color: red;
+}

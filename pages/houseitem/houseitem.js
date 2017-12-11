@@ -61,7 +61,7 @@ Page({
     var that=this;
     console.log(this.data.item);
     return {
-      title: this.data.item.estate + '/'+this.data.item.area+ '/' + this.data.item.struct +'/'+ this.data.item.totalprice +'/' + this.data.item.unitprice + '/' + this.data.item.fitment+this.data.item.title,
+      title: this.data.item.estate + '|'+this.data.item.area+ '|' + this.data.item.struct +'|'+ this.data.item.totalprice +'|' + this.data.item.unitprice + '|' + this.data.item.fitment+this.data.item.title,
       path: 'pages/houseitem/houseitem?' + util.parseParam(this.data.item),
       imageUrl: that.data.pic[0],
       success: function (res) {

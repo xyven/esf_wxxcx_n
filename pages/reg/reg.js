@@ -6,13 +6,13 @@ Page({
   data:{
     num:[0,1,2,3,4,5,6,7,8,9,10],
     fitlevel:['高档','中档','低档','毛坯'],
-    index:0,
+    index:1,
     multiArray1: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
     multiIndex1:[0,0],
     multiArray2: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
     multiIndex2: [0, 0, 0, 0],
-    letorrent:'let',
+    letorrent:'出售',
     residentialareaname:'',
     floor:0,
     allfloor:0,
@@ -29,7 +29,7 @@ Page({
     discription:'',
     phonenumber:'',
     facility:[],
-    frequence:12,
+    frequence:'',
     agentid:'',
   },
 
@@ -38,44 +38,49 @@ Page({
     this.setData({
       agentid:option.agentid
     })
-
   },
 
   tosalehouse:function(e){
     this.setData({
-      letorrent: 'let',
+      letorrent: '出售',
     });
   },
 
   torenthouse: function (e) {
     this.setData({
-      letorrent: 'rent',
+      letorrent: '出租',
     });
   },
 
   tobuyhouse: function (e) {
     this.setData({
-      letorrent: 'buy',
+      letorrent: '买',
     });
   },
 
   tohirehouse: function (e) {
     this.setData({
-      letorrent: 'hire',
+      letorrent: '租',
     });
   },
 
-  onblur:function(e){
+  onblur_ename:function(e){
     this.setData({
       residentialareaname:e.detail.value
     })    
+  }, 
+
+  onblur_loc: function (e) {
+    this.setData({
+      loc: e.detail.value
+    })
   }, 
 
   bindMultiPickerChange1:function(e){
     this.setData({
       floor:e.detail.value[0],
       allfloor:e.detail.value[1]
-    })    
+    })
   },
 
   //电梯
@@ -96,7 +101,8 @@ Page({
     })    
   },
 
-  onchangedire: function (e) {
+  /*
+  ononarea: function (e) {
     this.setData({
       housedirection: e.detail.value
     })
@@ -113,6 +119,7 @@ Page({
       priceofletland: e.detail.value
     })
   },
+  */
   bindPickerChange: function (e) {
     var that = this;
     this.setData({
@@ -121,6 +128,7 @@ Page({
     console.log(that.data.fitmentlevel);
   },
   //描述
+  /*
   onchangediscription: function (e) {
     this.setData({
       discription: e.detail.value
@@ -131,7 +139,7 @@ Page({
     this.setData({
       phonenumber: e.detail.value
     })
-  },
+  },*/
 
   oncheckfacility:function(e){
     this.setData({
@@ -163,9 +171,9 @@ Page({
   onreg:function(e){
     var formData = e.detail.value;
     console.log(formData);
-    var that = this;
+    var that = this;    
     wx.request({
-      url: config.service.regnewhouse,
+      url: config.service.regnewhouse+'?lr='+that.data.letorrent,
       data: formData,
       method: 'POST',
       header: {
@@ -185,6 +193,6 @@ Page({
           duration: 2000
         })        
       }
-    }) 
+    })    
   }
 })

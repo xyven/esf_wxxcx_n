@@ -1,1 +1,6 @@
-{}
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#CC3333",
+  "navigationBarTitleText": "房天下二手房源",
+  "navigationBarTextStyle": "white"
+}

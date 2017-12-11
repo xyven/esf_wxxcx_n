@@ -36,10 +36,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "登记页面",
 					"pathName": "pages/reg/reg",
-					"query": ""
+					"query": "agentid=xyf5167"
 				}
 			]
 		}

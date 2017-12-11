@@ -6,86 +6,91 @@
     </view>
     <view bindtap='tosalehouse'>
       <image src='../icon/deng.png'></image>
-      <text class="{{letorrent== 'let'?'nav-text-checked':'nav-text-normal'}}">卖房</text>
+      <text class="{{letorrent== '出售'?'nav-text-checked':'nav-text-normal'}}">出售</text>
     </view>
     <view bindtap='torenthouse'>
       <image src='../icon/deng.png'></image>
-      <text class="{{letorrent== 'rent'?'nav-text-checked':'nav-text-normal'}}">出租</text>
+      <text class="{{letorrent== '出租'?'nav-text-checked':'nav-text-normal'}}">出租</text>
     </view>
+    <!--
     <view bindtap='tobuyhouse'>
       <image src='../icon/deng.png'></image>
-      <text class="{{letorrent== 'buy'?'nav-text-checked':'nav-text-normal'}}">买房</text>
+      <text class="{{letorrent== '买'?'nav-text-checked':'nav-text-normal'}}">买房</text>
     </view>
     <view bindtap='tohirehouse'>
       <image src='../icon/deng.png'></image>
-      <text class="{{letorrent== 'hire'?'nav-text-checked':'nav-text-normal'}}">租房</text>
+      <text class="{{letorrent== '租'?'nav-text-checked':'nav-text-normal'}}">租房</text>
     </view>
+    -->
 </view>
 <view style='width:100%; height:135rpx'></view>
 <view>
+  <view class='tip'>
+    <text>提示：您在登记页面提交的信息将被发送到对应门店的中介，房天下合作中介将全力为您服务。</text>
+  </view>
   <form bindsubmit='onreg'>
     <view class='form-list'>
       <view class='input-title'>小区名称:</view>
-      <input class='input' name='resdarea' placeholder='请在这里输入' bindblur='onblur'>{{residentialareaname}}</input>
+      <input class='input' name='estatename' placeholder='请在这里输入'>{{residentialareaname}}</input>
     </view>
     <view class='form-list'>
       <view class='input-title'>房子位置:</view>
-      <input class='input' name='location' placeholder='几期几栋几室' bindblur='onblur'>{{residentialareaname}}</input>
+      <input class='input' name='location' placeholder='几期几栋几室'>{{residentialareaname}}</input>
     </view>
     <view class='form-list'>      
       <view class='input-title'>楼层：</view>
-      <picker class='picker' name='floor' mode="multiSelector" bindchange='bindMultiPickerChange1' value="{{multiIndex1}}" range="{{multiArray1}}">
+      <picker class='picker' name='floor' mode="multiSelector" bindchange='bindMultiPickerChange1' value="第{{floor}}层/总共有{{allfloor}}层" range="{{multiArray1}}">
       <view class='selector-detail'>第{{floor}}层/总共有{{allfloor}}层</view>
       </picker>      
     </view>
     <view class='form-list' style='padding-bottom:4rpx'>
     <view class='input-title'>电梯：</view>
       <radio-group  class='picker' name='haveelevator' bindchange="onelevatorchange">
-        <radio checked='true' value='true'>有</radio>
-        <radio value='false'>没有</radio>
+        <radio checked='true' value='有'>有</radio>
+        <radio value='无'>没有</radio>
       </radio-group>
     </view>
     <view class='form-list'>
       <view class='input-title'>户型：</view>
-      <picker class='picker' name='struction' mode="multiSelector" bindchange='bindMultiPickerChange2' value="{{multiIndex2}}" range="{{multiArray2}}">      
+      <picker class='picker' name='struction' mode="multiSelector" bindchange='bindMultiPickerChange2' value="{{nroom}}室{{nhall}}厅{{nchicken}}厨{{ntoilet}}卫" range="{{multiArray2}}">      
       <view class='selector-detail'>{{nroom}}室{{nhall}}厅{{nchicken}}厨{{ntoilet}}卫</view>
       </picker>    
     </view>
     <view class='form-list'>
       <view class='input-title'>房屋朝向：</view>
-      <input class='input' name='direction' placeholder='南北或者东西' bindblur='onchangedire'></input>
+      <input class='input' name='direction' placeholder='南北或者东西'></input>
     </view>
     <view class='form-list'>
       <view class='input-title'>面积：</view>
-      <input class='input' name='area' placeholder='平米' bindblur='onchangedire'></input>
+      <input class='input' name='area' placeholder='平米'></input>
     </view>
-    <view class='form-list' wx:if="{{letorrent=='let'}}">
+    <view class='form-list' wx:if="{{letorrent=='出售'}}">
       <view class='input-title'>报价:</view>
-      <input class='input' name='pricefirst' placeholder='单位万元人民币' bindblur='onchangepricefirst'></input>
+      <input class='input' name='pricefirst' placeholder='单位万元人民币'></input>
     </view>
-    <view class='form-list' wx:if="{{letorrent=='let'}}">
+    <view class='form-list' wx:if="{{letorrent=='出售'}}">
       <view class='input-title'>底价:</view>
-      <input class='input' name='priceland' placeholder='单位万元人民币' bindblur='onchangepriceland'></input>
+      <input class='input' name='priceland' placeholder='单位万元人民币'></input>
     </view>
-    <view class='form-list' wx:if="{{letorrent=='rent'}}">
+    <view class='form-list' wx:if="{{letorrent=='出租'}}">
       <view class='input-title'>月租金:</view>
-      <input class='input' name='rentprice' placeholder='单位元人民币' bindblur='onchangerentprice'></input>
+      <input class='input' name='rentprice' placeholder='单位元人民币'></input>
     </view>
-    <view class='form-list' wx:if="{{letorrent=='rent'}}">
+    <view class='form-list' wx:if="{{letorrent=='出租'}}">
       <view class='input-title'>交租频率:</view>
       <radio-group  class='picker' name='rdofreq' bindchange="onfreqchange">
-        <radio value='3'>三个月</radio>
-        <radio value='6'>半年</radio>
-        <radio checked='true' value='12'>一年</radio>
+        <radio value='三个月'>三个月</radio>
+        <radio value='半年'>半年</radio>
+        <radio checked='true' value='一年'>一年</radio>
       </radio-group>
     </view>
     <view class='form-list'>
      <view class='input-title'>装修:</view>
-      <picker name='fitment' bindchange='bindPickerChange' value="{{index}}" range="{{fitlevel}}">
+      <picker name='fitment' bindchange='bindPickerChange' value="{{fitlevel[index]}}" range="{{fitlevel}}">
          <view class='picker'>{{fitmentlevel}}</view>
       </picker>
     </view>
-    <view class='form-list' wx:if="{{letorrent=='rent'}}">
+    <view class='form-list' wx:if="{{letorrent=='出租'}}">
      <view class='input-title'>设施:</view>
       <checkbox-group name='facility' bindchange='oncheckfacility'>
         <checkbox value='空调'>空调</checkbox>
@@ -96,11 +101,11 @@
     </view>
     <view class='form-list'>
       <view class='input-title'>描述:</view>
-      <input class='picker' name='discription' placeholder='请在这里输入' bindblur='onchangediscription'></input>
+      <input class='picker' name='discription' placeholder='请在这里输入'></input>
     </view>
     <view class='form-list'>
       <view class='input-title'>联系手机:</view>
-      <input class='picker' name='tel' placeholder='请在这里输入' bindblur='onchangephone'></input>
+      <input class='picker' name='tel' placeholder='请在这里输入'></input>
     </view>
     <view  hidden='true' >
       <input name='agentid' value='{{agentid}}' bindblur='onchangephone'></input>

@@ -1,0 +1,85 @@
+.foot-item-up{
+  height: 75rpx;
+  border-left: 1rpx dashed #f00;
+  margin-left:290rpx; 
+}
+.foot-item{
+  display: flex;
+  flex-direction: row;
+}
+
+.foot-img-container{
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.foot-img-container image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;  
+}
+
+.foot-text-container1{
+  width: 215rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;  
+}
+
+.foot-text-container1 text{
+  font-size: 12rpx;
+}
+
+.foot-text-container2{
+  width: 310rpx;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10rpx;
+  justify-content: center;
+}
+
+.foot-text-container2 text{
+  font-size: 14rpx;
+}
+
+.ft-title{
+  font-weight: bold;
+}
+
+.ft-price{
+  color: red;
+}
+
+.reg-card{
+  display: flex;
+  flex-direction: row; 
+  border-radius: 10rpx;
+  background-color: #fff;
+  margin: 20rpx 10rpx 0rpx 10rpx;
+  border: 1rpx solid #ddd;
+  box-shadow: 1px 1px 1px #888888;
+}
+
+.reg-info{
+  display: flex;
+  flex-direction: column;    
+  padding-left:10rpx;
+  width: 75%;
+}
+
+.reg-info text{
+  font-size: 23rpx;
+}
+
+.reg-flag{
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reg-flag text{
+  color: #f22;
+  font-weight: bold;
+}

@@ -1,5 +1,6 @@
 /* pages/person/person.wxss */
 @import '../intensive.wxss';
+@import "../templates.wxss";
 .binddialog{
   position: fixed;
   width: 100%;
@@ -38,6 +39,10 @@
   margin-top:20rpx;
 }
 
+.header-container{
+  padding-left: 50rpx;
+}
+
 .btn{
   background-color:#f39d00;
   margin-left:20rpx;
@@ -66,4 +71,8 @@
   width: 60rpx;
   height: 60rpx;
   vertical-align: middle;
+}
+
+.footprint-list{
+  justify-content:flex-start;
 }

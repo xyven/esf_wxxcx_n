@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var config = require('../../config');
+var util = require('../../utils/util.js');
 
 Page({
 
@@ -12,11 +13,13 @@ Page({
     userInfo:null,
     code:null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    lstofhouse:[],
-    histories:[],
+    footprint:[],
+    regrecords:[],
     dobindagent:false,
     sendenable:true,
-    isbindagent:false
+    identity:'游客',
+    maincontent: 'footprint',  //footprint regrecord
+    
   },
 
   /**
@@ -66,10 +69,19 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
+          console.log(res.data);
           if(res.data!='')
-          that.setData({
-            isbindagent:true                                                        
-          })
+          {
+            that.setData({
+              identity: '中介'
+            })
+          }
+          else
+          {
+            that.setData({
+              identity: '游客'
+            })
+          }         
         }
       })
       //加载足迹
@@ -85,12 +97,15 @@ Page({
               'content-type': 'application/x-www-form-urlencoded'
             },
             success: function (res) {
-              console.log(res);
+              //console.log(res);
+              that.setData({
+                footprint:res.data
+              })
             }
           })
         }
       })
-      
+      //that.getRegRecord();    
     },
 
   tobindagent:function(e){
@@ -98,6 +113,23 @@ Page({
     var that = this;
     that.setData({
       dobindagent:true
+    })
+  },
+
+  onhtmletitem: function (event) {
+    var that = this;
+    //console.log(event);
+    var hi = that.data.footprint[event.currentTarget.id];
+    wx.navigateTo({
+      url: '../houseitem/houseitem?' + util.parseParam(hi)
+    });
+    //console.log('nt-houseletitem');
+  },
+
+  getfootprint:function(){
+    var that=this;
+    that.setData({
+      maincontent: 'footprint'
     })
   },
 
@@ -129,6 +161,31 @@ Page({
         }
       }
     })
+  },
+
+  getRegRecord:function(){
+    var that = this;
+    wx.login({
+      success: function (res) {
+        wx.request({
+          url: config.service.bindagnet + 'getregrecord',
+          data: {
+            'wxcode': res.code,
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            console.log(res);
+            that.setData({
+              maincontent: 'regrecord',
+              regrecords:res.data
+            })
+          }
+        })
+      }
+    }) 
   },
 
   nobind:function(e){

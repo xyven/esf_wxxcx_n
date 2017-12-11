@@ -9,12 +9,12 @@
             <image wx:if="{{item.new == 'yes'}}" src='../icon/new.png'></image>
             <text>{{item.title}}</text>
           </view>
-          <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
-          <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text> 
+          <text class='htl-info'>小区:{{item.estate}},位置:{{item.location}},楼层:{{item.floor}}</text>
+          <text class='htl-info'>户型:{{item.nroom}}室{{item.nhall}}厅{{item.nchicken}}厨{{item.ntoilet}}卫\t朝向:{{item.director}}</text> 
           <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
           <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text>
           <text class='htl-uptm'>上传时间:{{item.uptime}}</text>
-        </view>    
+        </view> 
     </view>
 </template>
 
@@ -22,12 +22,49 @@
     <view class='htl-item'>
         <view><image class='htl-mimg' src="{{item.pic=='' ? '../icon/housetosale.png':item.pic[0]}}"></image></view>      
         <view class='htl-txtinfo'>
-        <text class='htl-title'>{{item.title}}</text>
-        <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
-        <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
-        <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
-        <text class='htl-price'>租金:{{item.totalprice}}</text>
-        <text class='htl-uptm'>上传时间:{{item.uptime}}</text>
+          <text class='htl-title'>{{item.title}}</text>
+          <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
+          <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text>
+          <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
+          <text class='htl-price'>租金:{{item.totalprice}}</text>
+          <text class='htl-uptm'>上传时间:{{item.uptime}}</text>
         </view>
+    </view>
+</template>
+
+<template name='footprint'>
+  <view class='foot-item-up'></view>
+  <view class='foot-item'>
+    <view class='foot-text-container1'>
+      <text>最近:{{item.visittime}}</text>
+      <text>次数：{{item.visitnum}}</text>
+      <text>上传时间:{{item.uptime}}</text>
+    </view>
+    <view class='foot-img-container'>
+    <image src='{{item.pic[0]}}'></image>
+    </view>
+    <view class='foot-text-container2'>
+      <text class='ft-title'>{{item.title}}</text>
+      <text >小区:{{item.estate}}，楼层:{{item.floor}}，户型:{{item.struct}}，朝向:{{item.director}}，面积:{{item.area}}，装修:{{item.fitment}}</text>
+      <text class='ft-price'>价格:{{item.totalprice}}</text>
+    </view>  
+  </view>
+</template>
+
+<template name='regrecord'>
+    <view class='reg-card'>
+      <view class='reg-info'>
+        <text class='htl-title'>[{{item.letorrent}}]{{item.estatename}}</text>
+        <text class='htl-info'>位置:{{item.location}},楼层:{{item.floor}},{{item.haveelevator}}电梯</text>
+        <text class='htl-info'>户型:{{item.struction}},朝向:{{item.direction}}</text>
+        <text class='htl-info'>面积:{{item.area}}平米,装修:{{item.fitment}}</text>
+        <text wx:if="{{item.letorrent=='出售'}}" class='htl-price'>报价:{{item.pricefirst}}万/底价:{{item.priceland}}万</text>
+        <text wx:if="{{item.letorrent=='出租'}}" class='htl-price'>租金:{{item.rentprice}}元/月|{{item.freq}}一付</text>
+        <text wx:if="{{item.letorrent=='出租'}}" class='htl-price'>设施:{{item.facility}}</text>
+        <text class='htl-uptm'>上传时间:{{item.inserttime}},业主电话:{{item.tel}}</text>
+      </view>
+      <view class='reg-flag'>
+        <text>{{item.letorrent}}</text>
+      </view>
     </view>
 </template>
