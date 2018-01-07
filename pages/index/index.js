@@ -15,7 +15,7 @@ Page({
     agentid:"",
     lstofnews:[],
     lstofji:[],
-    maincontant:'agents',
+    maincontant:'newhouses', //agents newhouses
     toview:0
   },
   //事件处理函数
@@ -102,7 +102,25 @@ Page({
     }
     else
     {
-      that.onLoad();
+      wx.request({
+        url: config.service.getAgents,
+        data: {},
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          //console.log(res)
+          that.setData({
+            lst: res.data,
+            maincontant: 'agents',
+            toview: 0
+          })
+        },
+        fail: function () {
+          console.log("request fail!")
+        }
+      })
     }
   },
 
@@ -118,33 +136,16 @@ Page({
   },
 
   onLoad: function () {    
-    var that = this;    
-    wx.request({
-      url: config.service.getAgents,
-      data: {},
-      method:'POST',
-      header:{
-        'content-type':'application/x-www-form-urlencoded'
-      },
-      success:function(res){
-        //console.log(res)
-        that.setData({
-            lst:res.data,
-            toview: 0           
-            })
-      },
-      fail:function(){
-        console.log("request fail!")
-      }
-    })
-  },
+    var that = this;
+    that.getnewhouses();
+  },  
 
   onShareAppMessage: function () {
     var that = this;
     return {
-      title: '房天下二手房合作中介微门店',
+      title: '衢州房天下二手房最新房源',
       path: 'pages/index/index',
-      imageUrl: '../icon/timg.jpg',
+      //imageUrl: '../icon/timg.jpg',
       success: function (res) {
         // 转发成功
       },

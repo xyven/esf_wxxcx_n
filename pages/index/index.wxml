@@ -1,10 +1,6 @@
 <!--index.wxml-->
 <import src="../templates.wxml"/>
-<view class='navigate-contariner'>
-    <view bindtap='getagentlist'>
-      <image src='../icon/shou.png'></image>
-      <text class="{{maincontant=='agents'?'nav-text-checked':'nav-text-normal'}}">门店</text>
-    </view>
+<view class='navigate-contariner'>   
     <view bindtap='getnewhouses'>
       <image src='../icon/new-t.png'></image>
       <text class="{{maincontant=='newhouses'?'nav-text-checked':'nav-text-normal'}}">最新</text>
@@ -19,6 +15,10 @@
       <text class="{{isdengchecked?'nav-text-checked':'nav-text-normal'}}">排行</text>
     </view>
     -->
+    <view bindtap='getagentlist'>
+      <image src='../icon/shou.png'></image>
+      <text class="{{maincontant=='agents'?'nav-text-checked':'nav-text-normal'}}">门店</text>
+    </view>
     <view bindtap='toperson'>
       <image src='../icon/person.png'></image>
       <text class="{{isminechecked?'nav-text-checked':'nav-text-normal'}}">我的</text>

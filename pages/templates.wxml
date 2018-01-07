@@ -9,8 +9,8 @@
             <image wx:if="{{item.new == 'yes'}}" src='../icon/new.png'></image>
             <text>{{item.title}}</text>
           </view>
-          <text class='htl-info'>小区:{{item.estate}},位置:{{item.location}},楼层:{{item.floor}}</text>
-          <text class='htl-info'>户型:{{item.nroom}}室{{item.nhall}}厅{{item.nchicken}}厨{{item.ntoilet}}卫\t朝向:{{item.director}}</text> 
+          <text class='htl-info'>小区:{{item.estate}}\t楼层:{{item.floor}}</text>
+          <text class='htl-info'>户型:{{item.struct}}\t朝向:{{item.director}}</text> 
           <text class='htl-info'>面积:{{item.area}}\t装修:{{item.fitment}}</text>
           <text class='htl-price'>总价:{{item.totalprice}}\t单价:{{item.unitprice}}</text>
           <text class='htl-uptm'>上传时间:{{item.uptime}}</text>
@@ -67,4 +67,15 @@
         <text>{{item.letorrent}}</text>
       </view>
     </view>
+</template>
+
+<template name='visitingcard'>
+  <view class='htl-item'>
+    <view><image class='qrcode' src='{{qrcode}}' bindtap="previewImage"></image></view>
+    <view class='htl-txtinfo' style='padding-top:40rpx'>
+      <text  class='htl-info'>房天下付费会员或正式加入测试用户可获得专用小程序码，通过分享小程序码可在朋友圈分享自己的微门店。</text>
+      <text class='htl-price'>欢迎致电8880000咨询申请测试资格。</text>
+      <view style='display:flex; flex-direction:row;' bindtap="sharetoCOF"><image style='width:50rpx; height:50rpx' src='/pages/icon/pyq.png'></image><text style='font-size: 12px; line-height: 16px; margin-top:10rpx'>点击分享朋友圈</text></view>
+    </view>
+  </view>
 </template>

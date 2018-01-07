@@ -40,7 +40,7 @@ Page({
     duration: 1000,
     circular:true,
     toview:0,
-    qrcode: '../icon/timg.jpg',
+    qrcode: '',
     ischecked:{
       agentid: '',
       up10000: false,
@@ -61,7 +61,8 @@ Page({
     onloadlist:false,
     lastdate:'',
     onfuzzysearch:false,
-    maincontent:'let'
+    maincontent:'let',
+    doshare:false
   },
 
   /**
@@ -95,15 +96,16 @@ Page({
           isfirstload: false,
           searchLoading: true,
           lastdate: date.Format("yyyy-MM-dd")
-        })
+        });
         wx.setNavigationBarTitle({
           title: that.data.agentname + '的微门店',
-        })
+        });
+        that.drawSharePic();
       },
       fail: function () {
         console.log("request fail!")
       }
-    });
+    });    
  },
 
   searchScrollLower: function () {     
@@ -279,11 +281,43 @@ Page({
     //console.log('nt-houserentitem');
   },
 
+  //分享到朋友圈
+  sharetoCOF:function()  {
+    var that = this;
+    that.setData({
+      doshare: true
+    });
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: 300,
+      height: 200,
+      destWidth: 0,
+      destHeight: 0,
+      canvasId: 'myCanvas',
+      success: function (res) {
+        console.log(res.tempFilePath);
+        that.setData({
+          shareImgSrc: res.tempFilePath
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    });
+  },
+
+  savesharepic:function(){
+    var that = this;
+    that.setData({
+      doshare: false
+    });
+  },
+
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    var that=this;
+  onShareAppMessage: function () {        
     return {
       title: this.data.agentname+'的二手房微门店',
       path: 'pages/agentshop/agentshop?id=' + this.data.agentid,
@@ -297,21 +331,33 @@ Page({
     }
   },
 
+  //绘图
+  drawSharePic:function(){
+    //2. canvas绘制文字和图片
+    var that = this;
+    const ctx = wx.createCanvasContext('myCanvas');
+    var imgqrcode = that.data.qrcode;
+    console.log(imgqrcode);
+    //var imghead = this.data.housetolet[0].pic[0];
+    ctx.drawImage(imgqrcode, 0, 0, 100, 100);
+
+    ctx.setFillStyle('white')
+    ctx.fillRect(100, 100, 100, 100);
+
+    ctx.setFontSize(24)
+    ctx.fillText('长按扫码查看详情', 30, 770)
+    ctx.draw()
+  },
+
+
+
+
   //预览二维码
   previewImage: function(e){
     wx.previewImage({
       current:this.data.qrcode,
       urls: [this.data.qrcode]
     })
-  },
-
-  errorloadimg:function(e)
-  {
-    var that=this;
-    that.setData({
-      qrcode:'../icon/timg.jpg'
-    })
-    //console.log('1231');
   },
 
   s_up10000:function(e){

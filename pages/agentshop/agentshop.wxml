@@ -1,6 +1,10 @@
 <!--pages/agentshop/agentshop.wxml-->
 <import  src="../templates.wxml"/>
-<view class='navigate-contariner'>
+<view wx:if="{{doshare}}" class='canvasshare'>
+  <canvas style="width: 300px; height: 200px;" canvas-id="myCanvas"></canvas>
+  <button bindtap='savesharepic'>保存分享图片</button>
+</view>
+<view wx:if="{{!doshare}}" class='navigate-contariner'>
     <view bindtap='toindex'>
       <image src='../icon/shou.png'></image>
       <text class="{{isindexchecked?'nav-text-checked':'nav-text-normal'}}">首页</text>
@@ -45,6 +49,7 @@
         <view class="{{ischecked.room3?'label-select-c':'label-select-n'}}" bindtap='s_3room'><text>3室以上</text></view>
       </view> 
     </view>
+    <template is="visitingcard" data="{{qrcode}}"/>
   <!--出售列表-->
   <view class='housetolet-list clearfix' wx:if="{{numoflet>0 && maincontent=='let'}}" wx:for="{{lstforlet}}" wx:key="id" id="{{index}}" bindtap='onhtmletitem'>
     <template  is="house-list-item" data="{{item}}"/>
@@ -63,3 +68,5 @@
     <text>暂无出租房源</text>
   </view>
 </scroll-view>
+
+

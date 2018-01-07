@@ -1,5 +1,18 @@
 /* pages/agentshop/agentshop.wxss */
 @import "../intensive.wxss";
+
+.canvasshare{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: #ddd;
+  opacity: 0.95;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50rpx;
+}
+
 .sv{
   position: relative;
   flex: auto; 
@@ -221,11 +234,6 @@ view.text:before {
 .css_btn image{
   width: 70rpx;
   height: 70rpx;
-}
-
-.qrcode{
-  width: 129px;
-  height: 129px;
 }
 
 .loading{  
